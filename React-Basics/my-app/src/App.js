@@ -1,25 +1,29 @@
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import './App.css';
+import Header from './components/Header';
+import Footer from './components/Footer';
+import UserProfile from './components/UserProfile';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Header />
+      <Header />
+      <UserProfile name="Mahendra" age="25" place="Delhi" />
+      <UserProfile name="Deepak" age="No idea" place="BLR" />
+      <UserProfile name="Vinay" age="30" place="Tamil Nadu" />
+      <Footer />
+      <Footer />
+    </>
   );
 }
+
+// export function AnotherApp() {
+//   return (
+//     <p>I am a para</p>
+//   );
+// };
+
+
 
 export default App;
