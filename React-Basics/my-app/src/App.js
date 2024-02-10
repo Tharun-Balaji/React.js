@@ -5,11 +5,13 @@ import Footer from './components/Footer';
 import UserProfile from './components/UserProfile';
 import Counter from './components/Counter';
 import Product from './components/Product';
+import Form from './components/Form';
 
 function App() {
   return (
     <>
-      <Product />
+      <Form/>
+      {/* <Product /> */}
       {/* <Header />
       <Header />
       <Counter />
