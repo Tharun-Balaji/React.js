@@ -1,5 +1,5 @@
 import React from "react";
-import NavBar from "./NavBar";
+// import NavBar from "./NavBar";
 import Banner from "./Banner";
 import TrendingMovies from "./TrendingMovies";
 import Pagination from "./Pagination";
@@ -9,7 +9,7 @@ function Home(){
         <>
             {/* <div>Home Page</div> */}
             {/* // navbar */}
-            <NavBar></NavBar>
+            {/* <NavBar></NavBar> */}
             {/* // banner section */}
             <Banner></Banner>
             {/* // Trending Movies */}
