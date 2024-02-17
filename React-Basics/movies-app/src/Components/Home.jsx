@@ -7,7 +7,7 @@ import Pagination from "./Pagination";
 function Home(){
     return(
         <>
-            <div>Home Page</div>
+            {/* <div>Home Page</div> */}
             {/* // navbar */}
             <NavBar></NavBar>
             {/* // banner section */}

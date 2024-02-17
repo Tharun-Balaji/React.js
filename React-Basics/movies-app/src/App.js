@@ -8,12 +8,8 @@ function App() {
     //   Hello world!
     // </h1>
 
-    <div className="App">
-      <header className="App-header">
-        <h2>Movie App</h2>
+    
         <Home></Home>
-      </header>
-    </div>
   );
 }
 
