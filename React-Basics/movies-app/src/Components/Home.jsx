@@ -15,7 +15,7 @@ function Home(){
             {/* // Trending Movies */}
             <TrendingMovies></TrendingMovies>
             {/* // pagination */}
-            <Pagination></Pagination>
+            {/* <Pagination></Pagination> */}
         </>
     );
 };
