@@ -5,13 +5,30 @@ import MovieCard from "./Moviecard";
 import axios from "axios";
 
 function TrendingMovies(){
-    const [page_no, Set_page_no] = useState(1);
+    // const [page_no, Set_page_no] = useState(1);
+    const [count, setCount] = useState(1);
+
+  function Handle_Right_Arrow_Btn() {
+    // console.log("Plus button clicked");
+    // count++;
+    setCount(previous_count => ++previous_count);
+    // props.onClick(count + 1);
+  };
+
+  function Handle_Left_Arrow_Btn() {
+    // console.log("Plus button clicked");
+    // count++;
+    if ( count >  1 ){
+      setCount(previous_count => --previous_count);
+    //   props.onClick(count - 1);
+    }
+  };
     const [Trending_movies, Set_Trending_movies] = useState([]);
 
-    function get_Page_no(data) {
-        Set_page_no(data);
-        // console.log(data);
-    }
+    // function get_Page_no(data) {
+    //     Set_page_no(data);
+    //     // console.log(data);
+    // }
 
     useEffect( function(){
         axios.get('https://api.themoviedb.org/3/trending/movie/day?api_key=3ab3327354bb3dba18cfa4002b6f2885')
@@ -25,14 +42,14 @@ function TrendingMovies(){
 
 
     useEffect ( function() {
-        axios.get(`https://api.themoviedb.org/3/trending/movie/day?api_key=3ab3327354bb3dba18cfa4002b6f2885&page=${page_no}`)
+        axios.get(`https://api.themoviedb.org/3/trending/movie/day?api_key=3ab3327354bb3dba18cfa4002b6f2885&page=${count}`)
         .then(function (response) {
             Set_Trending_movies(response.data.results);
         })
         .catch(function(err) {
             console.log(err);
        } )
-    }, [page_no] );
+    }, [count] );
 
 
     if (Trending_movies.length === 0) {
@@ -55,7 +72,9 @@ function TrendingMovies(){
                 }
             </div>
             <Pagination
-                onClick = {get_Page_no} 
+                count = {count}
+                Handle_Left_Arrow_Btn = {Handle_Left_Arrow_Btn}
+                Handle_Right_Arrow_Btn = {Handle_Right_Arrow_Btn}
              />
         </>
     );
