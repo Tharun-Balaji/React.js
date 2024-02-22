@@ -6,7 +6,23 @@ import axios from "axios";
 
 function TrendingMovies(){
     // const [page_no, Set_page_no] = useState(1);
+    const [Trending_movies, Set_Trending_movies] = useState([]);
     const [count, setCount] = useState(1);
+    const [Watch_list, Set_watch_list] = useState([]);
+
+    function Handle_Add_to_Watch_list (id) {
+        const new_list = [...Watch_list,id];
+        localStorage.setItem("watch_list",JSON.stringify(new_list));
+        Set_watch_list(new_list);
+    };
+
+    function Handle_Remove_from_Watch_list (id) {
+        const new_list = Watch_list.filter( function(movie_id){
+            return movie_id !== id;
+        } );
+        localStorage.setItem("watch_list",JSON.stringify(new_list));
+        Set_watch_list(new_list);
+    };
 
   function Handle_Right_Arrow_Btn() {
     // console.log("Plus button clicked");
@@ -23,8 +39,6 @@ function TrendingMovies(){
     //   props.onClick(count - 1);
     }
   };
-    const [Trending_movies, Set_Trending_movies] = useState([]);
-
     // function get_Page_no(data) {
     //     Set_page_no(data);
     //     // console.log(data);
@@ -38,6 +52,8 @@ function TrendingMovies(){
             .catch(function(err) {
                  console.log(err);
             } )
+        let new_list = JSON.parse(localStorage.getItem("watch_list"));
+        Set_watch_list(new_list);
     },[] );
 
 
@@ -65,8 +81,12 @@ function TrendingMovies(){
                     Trending_movies.map((movieObj) => {
                         return <MovieCard
                             key={movieObj.id}
+                            id = {movieObj.id}
                             title={movieObj.title}
                             poster_path={movieObj.poster_path}
+                            Handle_Add_to_Watch_list={Handle_Add_to_Watch_list}
+                            Handle_Remove_from_Watch_list = {Handle_Remove_from_Watch_list}
+                            Watch_list={Watch_list}
                         />
                     })
                 }
