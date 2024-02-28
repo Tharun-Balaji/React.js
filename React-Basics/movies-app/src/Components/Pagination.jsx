@@ -5,7 +5,12 @@
 
 
 
-function Pagination({count, Handle_Left_Arrow_Btn, Handle_Right_Arrow_Btn}){
+function Pagination(
+  {
+    Page_no,
+    Handle_Left_Arrow_Btn,
+    Handle_Right_Arrow_Btn
+  }){
 
   
     return (
@@ -17,7 +22,7 @@ function Pagination({count, Handle_Left_Arrow_Btn, Handle_Right_Arrow_Btn}){
             ></i>
           </div>
           <div className='font-bold'>
-            {count}
+            {Page_no}
           </div>
           <div className='cursor-pointer'>
             <i
