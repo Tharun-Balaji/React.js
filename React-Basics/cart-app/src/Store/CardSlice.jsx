@@ -9,8 +9,12 @@ const cardSlice = createSlice(
             addToCart(state,action){ // Actions
                 return [...state, action.payload]
             },
-            removeFromCart(){ // Actions
-
+            removeFromCart(state,action){ // Actions
+                return state.filter(
+                    function(items){
+                        return items.id !== action.payload;
+                    }
+                )
             }
         }
     }
