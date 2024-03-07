@@ -29,7 +29,7 @@ export default function Products() {
     <div className="productsWrapper">
       {products.map((product) => {
         return (
-          <div className="card">
+          <div key={product.id} className="card">
             <img src={product.image} alt={product.name} />
             <h6>{product.title}</h6> <h5>{product.price}</h5>
             <button onClick={() => HandleAddTocart(product)} className="btn"> Add to Cart </button>
