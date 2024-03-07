@@ -1,7 +1,16 @@
 import { Link } from "react-router-dom";
+import {  useSelector } from "react-redux";
 
 
 export default function NavBar(){
+
+  const items = useSelector(
+    function(state){
+      return state.cart;
+    }
+  );
+
+  console.log(items);
     return (
       <div
         style={{
