@@ -23,11 +23,13 @@ export default function NavBar(){
         }}
       >
         <span className="logo">Redux Store</span>
+        <div>
         <Link to="/" className="navLink" >Home</Link>
 
         <Link to="/cart" className="navLink">Cart</Link>
 
-        <span className="cartCount"> Cart Item : 0 </span>
+        <span className="cartCount"> Cart Item : {items.length} </span>
+        </div>
       </div>
     );
 }

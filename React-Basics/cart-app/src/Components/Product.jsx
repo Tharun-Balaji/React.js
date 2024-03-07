@@ -1,13 +1,19 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import { addToCart } from "../Store/CardSlice";
+import { fetchProducts } from "../Store/ProductSlice";
 
 
 
 
 
 export default function Products() {
+
+  const {data, status} = useSelector(
+    function(state){
+      return state.product;
+    }
+  );
 
     const [ products, SetProducts ] = useState([]);
     const dispatch = useDispatch();
@@ -17,17 +23,23 @@ export default function Products() {
     }
 
     useEffect(function () {
-      axios.get("https://fakestoreapi.com/products").then((response) => {
-        SetProducts(response.data);
-      });
+      dispatch(fetchProducts());
     }, []);
 
-    if ( !products.length ){
-        return <div>Loading...</div>
+    
+
+    if ( status === 'loading' ){
+      return <div>Loading...</div>
     }
+
+    if ( status === "error"){
+      return <div>OOPs Something went Wrong</div>
+    }
+
+
   return (
     <div className="productsWrapper">
-      {products.map((product) => {
+      {data.map((product) => {
         return (
           <div key={product.id} className="card">
             <img src={product.image} alt={product.name} />
