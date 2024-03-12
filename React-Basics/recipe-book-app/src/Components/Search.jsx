@@ -1,9 +1,14 @@
 import { SearchIcon } from "@heroicons/react/solid"; // Assuming you have Heroicons installed
 
-function SearchBar() {
+function SearchBar({SearchStr, setSearchStr}) {
+
+  function HandleChange(e){
+    setSearchStr(e.target.value); 
+  }
+
   return (
     <div className="search-bar flex items-center rounded-md bg-gray-100 shadow-sm px-3 py-2  h-[20vh] justify-center gap-2 ">
-      <div >
+      <div>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -23,6 +28,8 @@ function SearchBar() {
         type="text"
         className="search-input  focus:outline-none focus:ring-indigo-500 focus:ring-opacity-50 rounded-md pl-2 w-[60%] h-[50%] text-3xl font-bold"
         placeholder="Search..."
+        value={SearchStr}
+        onChange={(e) => HandleChange(e)}
       />
     </div>
   );

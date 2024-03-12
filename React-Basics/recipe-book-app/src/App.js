@@ -44,24 +44,32 @@ function App() {
   }, []);
 
   // console.log(RecipeList);
-  const [recipeData, setRecipeData] = useState({
-    id: RecipeList.length,
-    recipeName: "",
-    description: "",
-    imageUrl: "",
-    ingredients: [],
-    instructions: "",
-  });
+  // const [recipeData, setRecipeData] = useState({
+  //   id: RecipeList.length,
+  //   recipeName: "",
+  //   description: "",
+  //   imageUrl: "",
+  //   ingredients: [],
+  //   instructions: "",
+  // });
 
-  useEffect( 
+  // useEffect( 
+  //   function(){
+  //     if (IsForEdit.IsForEdit && IsForEdit.RecipeId > -1) {
+  //       const data  = RecipeList[IsForEdit.RecipeId];
+  //       console.log(data);
+  //       setRecipeData({...RecipeList[IsForEdit.RecipeId]});
+  //     }
+  //   },[IsForEdit,RecipeList]
+  //  )
+   useEffect(
     function(){
-      if (IsForEdit.IsForEdit && IsForEdit.RecipeId > -1) {
-        const data  = RecipeList[IsForEdit.RecipeId];
-        console.log(data);
-        setRecipeData({...RecipeList[IsForEdit.RecipeId]});
-      }
-    },[IsForEdit]
-   )
+     SetIsForEdit({
+       IsForEdit: false,
+       RecipeId: -1
+     })
+    },[]
+   );
 
    const [recipe , setRecipe ] = useState([]);
 
@@ -73,22 +81,15 @@ function App() {
         }
       )
       setRecipe(data);
-      console.log();
+      // console.log();
     },[RecipeId, RecipeList]
   );
 
 //  console.log(window.location.pathname);
 
-  useEffect (
-    function(){
-      SetIsForEdit(
-        {
-          IsForEdit: false,
-          RecipeId: -1
-        }
-      )
-    },[window.location.pathname]
-  );
+  
+
+  // console.log(RecipeList);
 
   return (
     <BrowserRouter>
@@ -106,8 +107,8 @@ function App() {
           <Route path="/" element={<Home />}></Route>
 
           <Route path="/form" element={<RecipeForm 
-            recipeData = {recipeData}
-            setRecipeData = {setRecipeData}
+            // recipeData = {recipeData}
+            // setRecipeData = {setRecipeData}
           />}></Route>
 
           <Route path="/recipe" element={<RecipePage 
