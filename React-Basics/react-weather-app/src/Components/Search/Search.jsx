@@ -9,6 +9,7 @@ const Search = ( {onSearchChange} ) => {
 
     function handleOnChange(searchData){
         setSearch(searchData);
+        onSearchChange(searchData);
     }
 
     async function loadOptions(inputValue){
