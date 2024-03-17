@@ -1,0 +1,33 @@
+.city-input {
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 70vw;
+    margin: 10px 0;
+    
+  }
+
+  .search-container{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+  }
+
+  .btn{
+    padding: 8px;
+    font-size: 16px;
+    font-weight: 500;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 4rem;
+    height: 3rem;
+    cursor: pointer;
+  }
+  .btn:hover{
+     background-color: #757575;
+     color: white;
+     transform: scale(0.9);
+     box-shadow: 0 0 30px #757575;
+     transition: ease-out;
+  }

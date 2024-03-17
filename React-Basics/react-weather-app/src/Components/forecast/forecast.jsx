@@ -53,7 +53,7 @@ export default function Forecast({ data }) {
                 <div className="daily-details-grid">
                     <div className="daily-details-grid-item">
                        <label>Pressure</label>
-                       <label>{item.main.pressure} hpa</label>
+                       <label>{item.main.pressure} hPa</label>
                     </div>
                     <div className="daily-details-grid-item">
                        <label>Humidity</label>

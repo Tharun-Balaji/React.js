@@ -1,6 +1,7 @@
 import { AsyncPaginate } from "react-select-async-paginate";
 import { useState } from "react";
 import { GEO_API_URL, geoApiOptions } from "../../api";
+import "./Search.css"
 
 
 const Search = ( {onSearchChange} ) => {
@@ -32,13 +33,17 @@ const Search = ( {onSearchChange} ) => {
   
 
     return (
+      <div className="search-container" >
       <AsyncPaginate
       placeholder="Search for city"
       debounceTimeout={600}
       value={search}
       onChange={handleOnChange}
       loadOptions={loadOptions}
+      className="city-input"
       />
+      <button className="btn" >°C</button>
+      </div>
     );
 };
 
