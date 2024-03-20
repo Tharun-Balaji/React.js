@@ -5,6 +5,7 @@ import App from './App';
 import { store } from './app/store';
 import { fetchUsers } from  "./features/Users/usersSlice";
 
+
 store.dispatch(fetchUsers());
 
 

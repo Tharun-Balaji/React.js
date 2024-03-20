@@ -4,15 +4,29 @@ import PostsList from './features/posts/PostsList';
 import { store } from './app/store';
 import { Provider } from 'react-redux';
 import AddPostForm from './features/posts/AddPostForm';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import SinglePostPage from './features/posts/SinglePostPage';
+import Layout from './components/Layout';
+import EditPostForm from './features/posts/EditPostForm';
+
+
 
 function App() {
   return (
     <Provider store={store}>
-      <main className="App">
-      <AddPostForm />
-        <PostsList />
-       
-      </main>
+      <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<PostsList />} />
+
+          <Route path="post">
+            <Route index element={<AddPostForm />} />
+            <Route path=":postId" element={<SinglePostPage />} />
+            <Route path="edit/:postId" element={<EditPostForm />} />
+          </Route>
+        </Route>
+      </Routes>
+      </BrowserRouter>
     </Provider>
   );
 }
