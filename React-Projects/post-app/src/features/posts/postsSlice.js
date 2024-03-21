@@ -17,6 +17,8 @@ export const fetchPosts = createAsyncThunk('posts/fetchPosts', async () => {
 
 export const addNewPost = createAsyncThunk('posts/addNewPost', async (initialPost) => {
     const response = await axios.post(POSTS_URL, initialPost)
+    console.log(response)
+    axios.get(POSTS_URL).then((response) => console.log(response))
     return response.data
 })
 
@@ -117,7 +119,6 @@ const postsSlice = createSlice({
                 })
                 action.payload.id = sortedPosts[sortedPosts.length - 1].id + 1;
                 // End fix for fake API post IDs 
-
                 action.payload.userId = Number(action.payload.userId)
                 action.payload.date = new Date().toISOString();
                 action.payload.reactions = {
@@ -128,6 +129,7 @@ const postsSlice = createSlice({
                     coffee: 0
                 }
                 console.log(action.payload)
+                axios.get(POSTS_URL).then( (response) => console.log(response) )
                 state.posts.push(action.payload)
             })
             .addCase(updatePost.fulfilled, (state, action) => {
