@@ -1,7 +1,6 @@
 
 
 import {useState} from 'react'
-import {getImageUrl} from "../../utils"
 import styles from  "./Navbar.module.css"
 
 export default function Navbar() {
