@@ -1,9 +1,6 @@
-
-
-import skills from "../../data/skills.json"
-import history from "../../data/history.json"
+import skills from "../../data/skills.json";
+import history from "../../data/history.json";
 import styles from "./Experience.module.css";
-
 
 export default function Experience() {
   return (
@@ -28,10 +25,10 @@ export default function Experience() {
               <li key={id} className={styles.historyItem}>
                 <img
                   src={historyItem.imageSrc}
-                  alt={`${historyItem.organisation} Logo`}
+                  alt={`${historyItem.organization} Logo`}
                 />
                 <div className={styles.historyItemDetails}>
-                  <h3>{`${historyItem.role}, ${historyItem.organisation}`}</h3>
+                  <h3>{`${historyItem.role}, ${historyItem.organization}`}</h3>
                   <p>{`${historyItem.startDate} - ${historyItem.endDate}`}</p>
                   <ul>
                     {historyItem.experiences.map((experience, id) => {
@@ -45,5 +42,5 @@ export default function Experience() {
         </ul>
       </div>
     </section>
-  )
+  );
 }
