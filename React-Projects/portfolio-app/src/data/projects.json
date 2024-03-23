@@ -1,0 +1,10 @@
+[
+  {
+    "title": "KanbanBoard",
+    "imageSrc": "/assets/projects/KanbanBoard.png",
+    "description": "A Kanban Board Build Using HTML CSS and DOM Manipulation",
+    "skills": ["HTML", "CSS", "JavaScript"],
+    "demo": "https://tharun-balaji.github.io/kanban-board/",
+    "source": "https://github.com/Tharun-Balaji/kanban-board"
+  }
+]
