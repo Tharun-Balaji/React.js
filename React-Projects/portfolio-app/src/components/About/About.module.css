@@ -60,6 +60,7 @@
 
 .aboutItem p{
     font-size: 25px;
+    padding: 1rem;
 }
 
 @media screen and (width < 830px) {

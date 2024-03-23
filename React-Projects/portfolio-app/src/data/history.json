@@ -1,0 +1,24 @@
+[
+    {
+        "role": "HAM SME",
+        "organization": "Cognizant",
+        "startDate": "May, 2023",
+        "endDate": "Present",
+        "experiences": [
+          "Worked on Hardware Asset Management and Software Asset Management", 
+          "Collaborated on automation initiatives, leading to a 30% reduction in manual effort."
+      ],
+        "imageSrc": "/assets/history/CTSH.png"
+    },
+    {
+      "role": "Trainee",
+      "organization": "Cognizant",
+      "startDate": "Mar, 2023",
+      "endDate": "May, 2023",
+      "experiences": [
+        "Completed comprehensive training in protocols, configurations, and troubleshooting techniques in Networking.", 
+        "Achieved an outstanding rating of 4/5 in training performance"
+    ],
+      "imageSrc": "/assets/history/CTSH.png"
+    }
+  ]
