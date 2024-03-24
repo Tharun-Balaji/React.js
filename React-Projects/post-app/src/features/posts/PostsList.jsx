@@ -13,24 +13,28 @@ const PostsList = () => {
     useEffect(() => {
         if (postStatus === 'idle') {
             dispatch(fetchPosts())
+        }else{
+            return;
         }
     }, [postStatus, dispatch])
 
-    let content;
-    if (postStatus === 'loading') {
-        content = <p>"Loading..."</p>;
-    } else if (postStatus === 'succeeded') {
-        const orderedPosts = posts.toSorted((a, b) => b.date.localeCompare(a.date))
-        content = orderedPosts.map(post => <PostsExcerpt key={post.id} post={post} />)
-    } else if (postStatus === 'failed') {
-        content = <p>{error}</p>;
+    if (postStatus === 'idle'){
+        return(
+            <div>Please Wait while We are Fetching Data</div>
+        )
+    }
+    // let content;
+    if (postStatus === "loading") {
+      return (<p>Loading...</p>);
+    } else if (postStatus === "succeeded") {
+      return ( posts
+        .slice()
+        .sort((a, b) => b.date.localeCompare(a.date))
+        .map((post) => <PostsExcerpt key={post.id} post={post} />))
+    } else if (postStatus === "failed") {
+      return <p>{error}</p>;
     }
 
-    return (
-        <section>
-            <h2>Posts</h2>
-            {content}
-        </section>
-    )
+    
 }
 export default PostsList

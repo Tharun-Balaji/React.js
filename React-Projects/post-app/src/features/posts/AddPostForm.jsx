@@ -23,18 +23,18 @@ const AddPostForm = () => {
 
     const onSavePostClicked = () => {
         if (canSave) {
-            try {
+            // try {
                 setAddRequestStatus('pending')
-                dispatch(addNewPost({ title, body: content, userId })).unwrap()
+                dispatch(addNewPost({ title, body: content, userId }))
 
                 setTitle('')
                 setContent('')
                 setUserId('')
-            } catch (err) {
-                console.error('Failed to save the post', err)
-            } finally {
-                setAddRequestStatus('idle')
-            }
+            // } catch (err) {
+            //     console.error('Failed to save the post', err)
+            // } finally {
+            //     setAddRequestStatus('idle')
+            // }
         }
 
     }

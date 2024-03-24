@@ -35,19 +35,19 @@ const EditPostForm = () => {
 
     const onSavePostClicked = () => {
         if (canSave) {
-            try {
+            // try {
                 setRequestStatus('pending')
-                dispatch(updatePost({ id: post.id, title, body: content, userId, reactions: post.reactions })).unwrap()
+                dispatch(updatePost({ id: post.id, title, body: content, userId, reactions: post.reactions }))
 
                 setTitle('')
                 setContent('')
                 setUserId('')
                 navigate(`/post/${postId}`)
-            } catch (err) {
-                console.error('Failed to save the post', err)
-            } finally {
-                setRequestStatus('idle')
-            }
+            // } catch (err) {
+            //     console.error('Failed to save the post', err)
+            // } finally {
+            //     setRequestStatus('idle')
+            // }
         }
     }
 
@@ -59,19 +59,18 @@ const EditPostForm = () => {
     ))
 
     const onDeletePostClicked = () => {
-        try {
+        // try {
             setRequestStatus('pending')
-            dispatch(deletePost({ id: post.id })).unwrap()
-
+            dispatch(deletePost({ id: post.id }))
             setTitle('')
             setContent('')
             setUserId('')
             navigate('/')
-        } catch (err) {
-            console.error('Failed to delete the post', err)
-        } finally {
-            setRequestStatus('idle')
-        }
+        // } catch (err) {
+        //     console.error('Failed to delete the post', err)
+        // } finally {
+        //     setRequestStatus('idle')
+        // }
     }
 
     return (
