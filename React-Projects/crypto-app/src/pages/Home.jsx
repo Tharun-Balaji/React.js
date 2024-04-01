@@ -1,5 +1,6 @@
 import React from 'react'
 import { Outlet } from 'react-router-dom'
+import Logo from '../Components/Logo'
 
 export default function Home() {
   return (
@@ -7,6 +8,7 @@ export default function Home() {
       <div className=' w-screen h-screen bg-gray-300 fixed -z-10' >
 
       </div>
+      <Logo/>
       <Outlet/>
     </main>
   )
