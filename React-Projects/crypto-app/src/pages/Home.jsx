@@ -2,9 +2,11 @@ import React from 'react'
 import { Outlet } from 'react-router-dom'
 import Logo from '../Components/Logo'
 import Navigation from '../Components/Navigation'
+import { CryptoProvider } from '../context/CryptoContext'
 
 export default function Home() {
   return (
+    <CryptoProvider>
     <main className='  w-full h-full flex flex-col first-letter: content-center items-center relative text-white font-nunito' >
       <div className=' w-screen h-screen bg-gray-300 fixed -z-10' >
 
@@ -13,5 +15,6 @@ export default function Home() {
       <Navigation/>
       <Outlet/>
     </main>
+    </CryptoProvider>
   )
 }
