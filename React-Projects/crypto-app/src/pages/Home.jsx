@@ -1,6 +1,7 @@
 import React from 'react'
 import { Outlet } from 'react-router-dom'
 import Logo from '../Components/Logo'
+import Navigation from '../Components/Navigation'
 
 export default function Home() {
   return (
@@ -9,6 +10,7 @@ export default function Home() {
 
       </div>
       <Logo/>
+      <Navigation/>
       <Outlet/>
     </main>
   )
