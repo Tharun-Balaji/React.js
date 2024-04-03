@@ -3,7 +3,7 @@ import { CryptoContext } from '../context/CryptoContext';
 
 export default function TableComponent() {
 
-  const {CryptoData} = useContext(CryptoContext);
+  const {CryptoData,currency} = useContext(CryptoContext);
   // console.log(test);
 
   return (
@@ -65,7 +65,7 @@ export default function TableComponent() {
                     <td className=" py-4">{
                       new Intl.NumberFormat("en-In",{
                         style: "currency",
-                        currency: "USD",
+                        currency: currency,
                       }).format(data.current_price)
                     }</td>
                     <td className=" py-4">{data.total_volume}</td>
