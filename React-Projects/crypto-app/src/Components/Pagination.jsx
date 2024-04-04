@@ -1,6 +1,38 @@
-import { useContext } from "react";
+import { useContext, useRef } from "react";
 import paginationArrow from "../assets/pagination-arrow.svg";
 import { CryptoContext } from "../context/CryptoContext";
+import submitIcon from "../assets/submit-icon.svg";
+
+function PerPage(){
+
+    const inputRef = useRef(null);
+
+    return (
+        <form
+        className=" relative flex items-center font-nunito mr-12"
+        // onSubmit={handleCurrencySubmit}
+      >
+        <label
+          className=" relative flex justify-center items-center mr-2 font-bold"
+          htmlFor="prePage"
+        >
+        prePage :
+        </label>
+        <input
+          type="number"
+          placeholder="usd"
+          max={250}
+          min={1}
+          className=" w-16 rounded bg-gray-200 placeholder:text-gray-100 pl-2 required border border-transparent focus:border-cyan leading-4"
+          name="prePage"
+          ref={inputRef}
+        />
+        <button type="submit" className=" ml-1 cursor-pointer">
+          <img src={submitIcon} alt="submit" className=" w-full h-auto" />
+        </button>
+      </form>
+    );
+}
 
 export default function Pagination() {
 
@@ -23,6 +55,7 @@ export default function Pagination() {
 
   return (
     <div className=" flex items-center">
+        <PerPage/>
       <ul className=" flex items-center justify-end text-sm">
         <li className=" flex items-center">
           <button
