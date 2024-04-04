@@ -1,5 +1,6 @@
 import { useContext } from 'react'
 import { CryptoContext } from '../context/CryptoContext';
+import Pagination from './Pagination';
 
 export default function TableComponent() {
 
@@ -7,6 +8,7 @@ export default function TableComponent() {
   // console.log(test);
 
   return (
+    <>
     <div className=" flex flex-col mt-9 border border-gray-100 rounded">
       <table className=' w-full table-auto ' >
         <thead className=' capitalize text-base text-gray-100 font-medium border-b border-gray-100' >
@@ -113,6 +115,12 @@ export default function TableComponent() {
          }
         </tbody>
       </table>
+     
     </div>
+    <div className=' flex justify-between items-center mt-4 capitalize h-[2rem]' >
+      <span>Data Provided by <a className=' text-cyan' href="http://www.coingecko.com" target='blank'>CoinGecko</a></span>
+    <Pagination/>
+    </div>
+    </>
   );
 }
