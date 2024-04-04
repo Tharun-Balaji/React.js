@@ -5,12 +5,22 @@ import submitIcon from "../assets/submit-icon.svg";
 
 function PerPage(){
 
+    const {setPerPage} = useContext(CryptoContext);
     const inputRef = useRef(null);
+
+    function handleSubmit(e){
+        e.preventDefault();
+        const val = inputRef.current.value;
+        if (val !== 0) {
+        setPerPage(val);
+        inputRef.current.value = val;
+        }
+    }
 
     return (
         <form
         className=" relative flex items-center font-nunito mr-12"
-        // onSubmit={handleCurrencySubmit}
+        onSubmit={handleSubmit}
       >
         <label
           className=" relative flex justify-center items-center mr-2 font-bold"
@@ -20,7 +30,7 @@ function PerPage(){
         </label>
         <input
           type="number"
-          placeholder="usd"
+          placeholder= "10"
           max={250}
           min={1}
           className=" w-16 rounded bg-gray-200 placeholder:text-gray-100 pl-2 required border border-transparent focus:border-cyan leading-4"
@@ -36,9 +46,9 @@ function PerPage(){
 
 export default function Pagination() {
 
-   const {page, setPage, totalPages} = useContext(CryptoContext);
+   const {page, setPage, totalPages,perPage} = useContext(CryptoContext);
 
-   const totalNumberOfPages = Math.ceil(totalPages/10);
+   const totalNumberOfPages = Math.ceil(totalPages/perPage);
 
    function Next() {
      if (page === totalNumberOfPages) return null;
