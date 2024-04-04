@@ -1,21 +1,22 @@
-import { useState } from "react";
+import { useContext } from "react";
 import paginationArrow from "../assets/pagination-arrow.svg";
+import { CryptoContext } from "../context/CryptoContext";
 
 export default function Pagination() {
 
-   const [currentPage , setCurrentPage] = useState(1);
+   const {page, setPage, totalPages} = useContext(CryptoContext);
 
-   const totalNumberOfPages = 250;
+   const totalNumberOfPages = Math.ceil(totalPages/10);
 
    function Next() {
-     if (currentPage === totalNumberOfPages) return null;
-     setCurrentPage(currentPage + 1);
+     if (page === totalNumberOfPages) return null;
+     setPage(page + 1);
    }
 
 
    function Previous() {
-     if (currentPage === 1) return null;
-     setCurrentPage(currentPage - 1);
+     if (page === 1) return null;
+     setPage(page - 1);
    }
 
    
@@ -31,21 +32,21 @@ export default function Pagination() {
             <img className="w-full h-auto" src={paginationArrow} alt="left" />
           </button>
         </li>
-        {currentPage + 1 === totalNumberOfPages ||
-        currentPage === totalNumberOfPages ? (
+        {page + 1 === totalNumberOfPages ||
+        page === totalNumberOfPages ? (
           <li>
             <button className=" outline-0 hover:text-cyan rounded-full w-8 h-8 flex items-center justify-center text-lg">
               ...
             </button>
           </li>
         ) : null}
-        {currentPage - 1 !== 0 ? (
+        {page - 1 !== 0 ? (
           <li>
             <button
               onClick={Previous}
               className=" outline-0 hover:text-cyan rounded-full w-8 h-8 flex items-center justify-center bg-gray-100 mx-1.5"
             >
-              {currentPage - 1}
+              {page - 1}
             </button>
           </li>
         ) : null}
@@ -54,32 +55,32 @@ export default function Pagination() {
             disabled
             className=" outline-0  rounded-full w-8 h-8 flex items-center justify-center bg-cyan text-gray-300 mx-1.5"
           >
-            {currentPage}
+            {page}
           </button>
         </li>
-        {currentPage + 1 !== totalNumberOfPages &&
-        currentPage !== totalNumberOfPages ? (
+        {page + 1 !== totalNumberOfPages &&
+        page !== totalNumberOfPages ? (
           <li>
             <button
               onClick={Next}
               className=" outline-0 hover:text-cyan rounded-full w-8 h-8 flex items-center justify-center bg-gray-100 mx-1.5"
             >
-              {currentPage + 1}
+              {page + 1}
             </button>
           </li>
         ) : null}
-        {currentPage + 1 !== totalNumberOfPages &&
-        currentPage !== totalNumberOfPages ? (
+        {page + 1 !== totalNumberOfPages &&
+        page !== totalNumberOfPages ? (
           <li>
             <button className=" outline-0 hover:text-cyan rounded-full w-8 h-8 flex items-center justify-center text-lg">
               ...
             </button>
           </li>
         ) : null}
-        {currentPage !== totalNumberOfPages ? (
+        {page !== totalNumberOfPages ? (
           <li>
             <button
-              onClick={() => setCurrentPage(totalNumberOfPages)}
+              onClick={() => setPage(totalNumberOfPages)}
               className=" outline-0 hover:text-cyan rounded-full w-8 h-8 flex items-center justify-center bg-gray-100 mx-1.5"
             >
               {totalNumberOfPages}
