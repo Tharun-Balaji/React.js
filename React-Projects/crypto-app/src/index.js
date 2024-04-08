@@ -1,36 +1,46 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-// import App from './App';
-import reportWebVitals from './reportWebVitals';
-import { RouterProvider, createBrowserRouter } from "react-router-dom"
-import Home from './pages/Home';
-import Crypto from './pages/Crypto';
-import Trending from './pages/Trending';
-import Saved from './pages/Saved';
+import React from "react";
 
-const router = createBrowserRouter ([
+import ReactDOM from "react-dom/client";
+
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+
+import "./index.css";
+import reportWebVitals from "./reportWebVitals";
+
+import CryptoDetails from "./Components/CryptoDetails";
+import Crypto from "./pages/Crypto";
+import Home from "./pages/Home";
+import Saved from "./pages/Saved";
+import Trending from "./pages/Trending";
+
+const router = createBrowserRouter([
   {
     path: "/",
-    element: <Home/>,
+    element: <Home />,
     children: [
       {
         path: "/",
-        element: <Crypto/>
+        element: <Crypto />,
+        children: [
+          {
+            path: ":coinID",
+            element: <CryptoDetails />,
+          },
+        ],
       },
       {
         path: "/trending",
-        element: <Trending/>
-      },{
+        element: <Trending />,
+      },
+      {
         path: "/saved",
-        element: <Saved/>
-      }
-
+        element: <Saved />,
+      },
     ],
-  }
+  },
 ]);
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <RouterProvider router={router} />
