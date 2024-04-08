@@ -13,13 +13,14 @@ export function CryptoProvider({ children }) {
   const [page, setPage] = useState(1);
   const [ totalPages, setTotalPages] = useState(250);
   const [perPage, setPerPage] = useState(10)
+  const [ coinData, setCoinData] = useState()
 
   
 
   async function getData() {
     try {
       const data = await fetch(
-        `https://api.coingecko.com/api/v3/exchanges/list`
+        `https://api.coingecko.com/api/v3/exchanges/list&x_cg_demo_api_key=CG-xPTDuU1xWf9V99UybnaCu79t`
       )
         .then((res) => res.json())
         .then((json) => json);
@@ -61,9 +62,49 @@ export function CryptoProvider({ children }) {
     setCoinSearch("");
   }
 
+  async function getCoinData(coinId) {
+    try {
+      const data = await fetch(
+        `https://api.coingecko.com/api/v3/coins/${coinId}?localization=false&tickers=false&market_data=true&community_data=false&developer_data=true&sparkline=false&x_cg_demo_api_key=CG-xPTDuU1xWf9V99UybnaCu79t`
+      )
+        .then((res) => res.json())
+        .then((json) => json);
+
+      // console.log("CoinData", data);
+      setCoinData(data);
+    } catch (error) {
+      console.log(error);
+      
+    }
+  }
+
   useEffect(() => {
     getData();
   }, [coinSearch, currency, sortBy,page, perPage]);
-
-  return <CryptoContext.Provider value={{CryptoData, searchData, getSearchResult, setSearchData, setCoinSearch, currency, setCurrency, sortBy, setSortBy,page, setPage, totalPages, resetFunction,setPerPage, perPage}}>{children}</CryptoContext.Provider>;
+  
+  return (
+    <CryptoContext.Provider
+      value={{
+        CryptoData,
+        searchData,
+        getSearchResult,
+        setSearchData,
+        setCoinSearch,
+        currency,
+        setCurrency,
+        sortBy,
+        setSortBy,
+        page,
+        setPage,
+        totalPages,
+        resetFunction,
+        setPerPage,
+        perPage,
+        coinData,
+        getCoinData,
+      }}
+    >
+      {children}
+    </CryptoContext.Provider>
+  );
 }

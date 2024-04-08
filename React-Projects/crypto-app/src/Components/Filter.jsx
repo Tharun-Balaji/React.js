@@ -67,9 +67,7 @@ export default function Filter() {
           <img
             src={selectIcon}
             alt="submit"
-            className="w-[1rem] h-auto
-         absolute right-1 top-2 pointer-events-none
-         "
+            className="w-[1rem] h-auto absolute right-1 top-2 pointer-events-none"
           />
         </label>
         <button

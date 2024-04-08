@@ -1,6 +1,7 @@
 import { useContext } from 'react'
 import { CryptoContext } from '../context/CryptoContext';
 import Pagination from './Pagination';
+import { Link } from 'react-router-dom';
 
 export default function TableComponent() {
 
@@ -61,15 +62,22 @@ export default function TableComponent() {
                         src={data.image}
                         alt={data.name}
                       />
-                      <span>{data.symbol}</span>
+                      <span>
+                      <Link to={`${data.id}`} className="cursor-pointer">
+                      {data.symbol}
+                      </Link></span>
                     </td>
-                    <td className=" py-4">{data.name}</td>
-                    <td className=" py-4">{
-                      new Intl.NumberFormat("en-In",{
+                    <td className=" py-4">
+                      <Link to={`${data.id}`} className="cursor-pointer">
+                        {data.name}
+                      </Link>
+                    </td>
+                    <td className=" py-4">
+                      {new Intl.NumberFormat("en-In", {
                         style: "currency",
                         currency: currency,
-                      }).format(data.current_price)
-                    }</td>
+                      }).format(data.current_price)}
+                    </td>
                     <td className=" py-4">{data.total_volume}</td>
                     <td className=" py-4">
                       {data.market_cap_change_percentage_24h}%
