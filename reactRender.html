@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Render HTML Tree</title>
+</head>
+<body>
+  <div id="root"></div>
+  <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+
+  <script>
+    const obj = {
+      type: 'div',
+      props: {
+        children: [
+          { type: 'h1', props: { children: "this is" } },
+          {
+            type: 'p',
+            props: {
+              className: 'paragraph',
+              children: [
+                "a",
+                {
+                  type: (props) => ({ type: "button", props: { children: props.counter + "Clicks" } }),
+                  props: { counter: 1 }
+                },
+                'from'
+              ]
+            }
+          }
+        ]
+      }
+    };
+
+    function render(node) {
+      console.log(node)
+      // Base case: If the node is a string, return it as is
+      if (typeof node === 'string') {
+        return node
+      }
+
+      // Handle functional components
+      if (typeof node.type === 'function') {
+        console.log(node);
+        const FunctionalComponent = node.type;
+        console.log(FunctionalComponent);
+        const renderedComponent = FunctionalComponent(node.props);
+        console.log(renderedComponent)
+        return render(renderedComponent);
+      }
+
+      // Create the element
+      const { type, props } = node;
+      // const { children } = props;
+      // const element = document.createElement(type);
+
+      // Set attributes, if any
+      // if (props) {
+      //   for (let attr in props) {
+      //     if (attr !== 'children') {
+      //       element.setAttribute(attr, props[attr]);
+      //     }
+      //   }
+      // }
+
+      // Render the children recursively
+    //   if (children) {
+    //     for (let child of children) {
+    //       const childNode = render(child);
+    //       element.appendChild(childNode);
+    //     }
+    //   }
+
+    //   return element;
+      //   let children = [];
+      //   if (props.children) {
+      //     console.log(props.children);
+      //     for ( const ele of props.children) {
+      //       console.log(ele);
+      //       children.push(render(ele));
+      //     }
+      //   }
+
+      //   let attributes = {};
+      //   if (props) {
+      //     for (let attr in props) {
+      //     if (attr !== 'children') {
+      // //       element.setAttribute(attr, props[attr]);
+      //       attributes[attr] = props[attr];
+      //     }
+      //   }
+      // }
+
+      if (Array.isArray(node)) {
+        return node.map(render);
+      }
+
+        return React.createElement(node.type, node.props, ...render(node.props.children));
+
+    }
+
+    const rootElement = ReactDOM.createRoot(document.getElementById('root'));
+    console.log(rootElement)
+    const renderedTree = render(obj);
+    console.log(renderedTree)
+    rootElement.render(renderedTree);
+  </script>
+</body>
+</html>

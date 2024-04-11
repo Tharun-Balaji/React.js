@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <div id="root"></div>
+
+    <script>
+        // const ele = document.querySelector('#root');
+    //     const ele1 = React.createElement("h1");
+    //     const ele2 = React.createElement("h2");
+    //     const ele3 = React.createElement("h3");
+    // console.log(React.createElement("div",{props:"the"},ele1,ele2,ele3));
+    const txt = document.createTextNode("Hello, world!")
+    document.createElement("div").appendChild(document.createTextNode("World!"));
+    // const ele = document.querySelector("#root").appendChild(txt);
+    const root = ReactDOM.createRoot(document.querySelector("#root"))
+    root.render("txt")
+
+    // console.log(null == undefined);
+    </script>
+  
+</body>
+</html>

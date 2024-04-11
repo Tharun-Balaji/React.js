@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+
+    <div id="root"></div>
+
+    <script>
+        // const ele = document.querySelector('#root');
+        // const root = ReactDOM.createRoot(ele);
+        // console.log(root);
+
+
+
+        // const h2 = React.createElement('h1', {}, "title");
+        // console.log(h2)
+        // // root.render(h2)
+
+        // const h3 = React.createElement('h2', {}, "title");
+        // console.log(h3)
+        // // root.render(h3)
+
+        // const h1 = React.createElement('div', {}, "title", [h2, h3]);
+        // console.log(h1)
+        // root.render(h1)
+
+
+        const obj =
+        {
+            type: 'div', props: {
+                children: [
+                    {
+                        type: 'hl', props: {
+                            children: "this is"
+                        }
+                    },
+                    {
+                        type: 'p', props: {
+                            class: 'paragraph',
+                            children: [
+                                "a",
+                                {
+                                    type: (props) => ({
+                                        type: "button",
+                                        props: {
+                                            children: props.counter + "Clicks"
+                                        }
+                                    }),
+                                    props: { counter: 1 }
+                                },
+                                'from'
+                            ]
+                        }
+                    }
+                ]
+            }
+        }
+
+
+        // import React from 'react';
+        // import ReactDOM from 'react-dom';
+
+        const renderElement = (element) => {
+            if (typeof element === 'string' || typeof element === 'number') {
+                return element;
+            }
+            let children = null;
+            if (Array.isArray(element)) {
+                return element.map(renderElement);
+            }
+
+            if (typeof element.type === 'function') {
+                return React.createElement(element.type, element.props, ...renderElement(element.props.children));
+            }
+
+            return React.createElement(
+                element.type,
+                element.props,
+                ...renderElement(element.props.children)
+            );
+        };
+
+        const obj2 = {
+            type: 'div',
+            props: {
+                children: [
+                    { type: 'h1', props: { children: "this is" } },
+                    {
+                        type: 'p',
+                        props: {
+                            className: 'paragraph',
+                            children: [
+                                "a",
+                                {
+                                    type: (props) => ({ type: "button", props: { children: props.counter + "Clicks" } }),
+                                    props: { counter: 1 }
+                                },
+                                'from'
+                            ]
+                        }
+                    }
+                ]
+            }
+        };
+
+        // const App = () => {
+        //     return renderElement(obj);
+        // };
+
+        ReactDOM.render(renderElement(obj), document.getElementById('root'));
+
+
+
+    </script>
+
+</body>
+
+</html>
