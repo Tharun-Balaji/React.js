@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import {  useParams, useNavigate } from "react-router-dom"
 import { CryptoContext } from '../context/CryptoContext';
+import Charts from './Charts';
 
 
 function HighLowIndicator({currentPrice,low,high}){
@@ -314,8 +315,8 @@ export default function CryptoDetails() {
                   </div>
                 </div>
               </div>
-              <div className="flex flex-col w-[55%] h-full pl-4 bg-green">
-                Right
+              <div className="flex flex-col w-[55%] h-full pl-4">
+                <Charts id = {data.id} />
               </div>
             </div>
           ) : null}
