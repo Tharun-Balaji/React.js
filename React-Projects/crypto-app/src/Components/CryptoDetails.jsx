@@ -3,6 +3,25 @@ import ReactDOM from 'react-dom';
 import {  useParams, useNavigate } from "react-router-dom"
 import { CryptoContext } from '../context/CryptoContext';
 
+
+function HighLowIndicator({currentPrice,low,high}){
+
+  const [green , setGreen] =useState();
+
+  useEffect(function(){
+    const total = high - low;
+    const greenZone = ((high-currentPrice) * 100) / total;
+    setGreen(Math.ceil(greenZone));
+  },[currentPrice,high,low])
+
+  return (
+    <>
+    <span className='bg-red h-1.5 rounded-l-lg w-[50%]' style={{width: `${100-green}%`}} ></span>
+    <span className='bg-green h-1.5 rounded-l-lg w-[50%]' style={{width: `${green}%`}} ></span>
+    </>
+  )
+}
+
 export default function CryptoDetails() {
   const { coinID } = useParams();
   const navigate = useNavigate();
@@ -23,7 +42,7 @@ export default function CryptoDetails() {
         onClick={close}
       >
         <div
-          className="w-[65%] h-[80%] bg-gray-300 bg-opacity-75 rounded-lg text-white relative"
+          className="w-[65%] h-[85%] bg-gray-300 bg-opacity-75 rounded-lg text-white relative"
           onClick={(e) => {
             e.stopPropagation();
           }}
@@ -143,6 +162,16 @@ export default function CryptoDetails() {
                   </h2>
                 </div>
 
+                    <div className='flex w-full mt-4 justify-between' >
+                      <HighLowIndicator 
+                        currentPrice =  {data.market_data.current_price[currency]}
+                        high =  {data.market_data.high_24h[currency]}
+                        low =  {data.market_data.low_24h[currency]}
+
+                        // currentPrice =  {data.market_data.current_price[currency]}
+
+                       />
+                    </div>
               
 
                 <div className="flex w-full mt-4 justify-between">
@@ -218,19 +247,10 @@ export default function CryptoDetails() {
                       {data?.links?.blockchain_site[0].substring(0, 30)}
                     </a>
 
-                    {data?.links?.official_forum_url[0] && (
-                      <a
-                        target={"_blank"}
-                        rel="noreferrer"
-                        className="text-sm bg-gray-200 text-gray-100 px-1.5 py-0.5 my-1 rounded"
-                        href={data?.links?.official_forum_url[0]}
-                      >
-                        {data?.links?.official_forum_url[0].substring(0, 30)}
-                      </a>
-                    )}
+                    
                   </div>
 
-                  <div className="flex flex-col content-start">
+                  <div className="flex flex-col content-start  mb-1">
                     <span className="text-sm capitalize text-gray-100">
                       sentiment
                     </span>
