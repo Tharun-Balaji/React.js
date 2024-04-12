@@ -66,7 +66,7 @@ export default function Charts({ id }) {
       .then((res) => res.json())
       .then((json) => json);
 
-    console.log("chart-data", data);
+    // console.log("chart-data", data);
 
     const convertedData = data[type].map((item) => {
       return {
