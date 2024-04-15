@@ -32,6 +32,7 @@ function HighLowIndicator({ currentPrice, low, high }) {
 
 export default function CryptoDetails() {
   const { coinID } = useParams();
+  console.log(coinID)
   const navigate = useNavigate();
   const { getCoinData, coinData: data, currency } = useContext(CryptoContext);
 

@@ -2,7 +2,7 @@ import { createContext, useEffect, useState } from "react";
 
 
 
-const TrendingContext = createContext({});
+export const TrendingContext = createContext({});
 
 
 export function TrendingProvider({children}){
@@ -13,13 +13,11 @@ export function TrendingProvider({children}){
         const data = await fetch(
           "https://api.coingecko.com/api/v3/search/trending"
         )
-          .then((res) => {
-            res.json();
-          })
+          .then((res) => res.json())
           .then((json) => json);
 
         console.log(data);
-        setTrendData(data);
+        setTrendData(data.coins);
       } catch (error) {
         console.log(error);
       }
