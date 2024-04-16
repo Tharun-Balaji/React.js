@@ -7,6 +7,27 @@ export default function Trending() {
 
   const {trendData,resetTrendingResults} = useContext(TrendingContext)
 
+
+  if ( !trendData ){
+    return(
+      <section className='w-[80%] h-full flex flex-col mt-16 mb-24 relative' >
+    <div className=" flex flex-wrap justify-evenly w-full min-h-[60vh] py-8 mt-9 border border-gray-100 rounded">
+      <div
+      className="w-full h-full flex justify-center items-center
+       "
+    >
+      <div
+        className="w-8 h-8 border-4 border-cyan rounded-full
+       border-b-gray-200 animate-spin"
+        role="status"
+      />
+      <span className="ml-2">Please Wait...</span>
+    </div>
+    </div>
+    </section>
+    )
+  }
+
   return (
     <section className='w-[80%] h-full flex flex-col mt-16 mb-24 relative' >
     <div className=" flex flex-wrap justify-evenly w-full min-h-[60vh] py-8 mt-9 border border-gray-100 rounded">

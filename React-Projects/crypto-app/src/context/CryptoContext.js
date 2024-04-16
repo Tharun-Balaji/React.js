@@ -18,17 +18,19 @@ export function CryptoProvider({ children }) {
   
 
   async function getData() {
-    try {
-      const data = await fetch(
-        `https://api.coingecko.com/api/v3/exchanges/list&x_cg_demo_api_key=CG-xPTDuU1xWf9V99UybnaCu79t`
-      )
-        .then((res) => res.json())
-        .then((json) => json);
+    setCryptoData();
+    setTotalPages(250);
+    // try {
+    //   const data = await fetch(
+    //     `https://api.coingecko.com/api/v3/exchanges/list&x_cg_demo_api_key=CG-xPTDuU1xWf9V99UybnaCu79t`
+    //   )
+    //     .then((res) => res.json())
+    //     .then((json) => json);
 
-      setTotalPages(data.length);
-    } catch (error) {
-      console.log(error);
-    }
+    //   setTotalPages(data.length);
+    // } catch (error) {
+    //   console.log(error);
+    // }
     try {
       const data = await fetch(
         `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency}&ids=${coinSearch}&order=${sortBy}&per_page=${perPage}&page=${page}&sparkline=false&price_change_percentage=1h%2C24h%2C7d&locale=en&x_cg_demo_api_key=CG-xPTDuU1xWf9V99UybnaCu79t`
@@ -63,6 +65,7 @@ export function CryptoProvider({ children }) {
   }
 
   async function getCoinData(coinId) {
+    setCoinData();
     try {
       const data = await fetch(
         `https://api.coingecko.com/api/v3/coins/${coinId}?localization=false&tickers=false&market_data=true&community_data=false&developer_data=true&sparkline=false&x_cg_demo_api_key=CG-xPTDuU1xWf9V99UybnaCu79t`

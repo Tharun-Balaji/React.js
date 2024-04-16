@@ -56,7 +56,8 @@ export default function TableComponent() {
   return (
     <>
       <div className=" flex flex-col mt-9 border border-gray-100 rounded">
-        <table className=" w-full table-auto ">
+        { CryptoData ?
+          <table className=" w-full table-auto ">
           <thead className=" capitalize text-base text-gray-100 font-medium border-b border-gray-100">
             <tr>
               <th className=" py-1">assets</th>
@@ -64,9 +65,9 @@ export default function TableComponent() {
               <th className=" py-1">price</th>
               <th className=" py-1">Total Volume</th>
               <th className=" py-1">Market Cap</th>
-              <th className=" py-1">1Hr</th>
-              <th className=" py-1">24Hr</th>
-              <th className=" py-1">7D</th>
+              <th className=" py-1 lg:table-cell hidden">1Hr</th>
+              <th className=" py-1 lg:table-cell hidden">24Hr</th>
+              <th className=" py-1 lg:table-cell hidden">7D</th>
             </tr>
           </thead>
           <tbody>
@@ -109,8 +110,8 @@ export default function TableComponent() {
                         className={
                           Number(data.price_change_percentage_1h_in_currency) >
                           0
-                            ? "py-4 text-green"
-                            : "py-4 text-red"
+                            ? "lg:table-cell hidden py-4 text-green"
+                            : "lg:table-cell hidden py-4 text-red"
                         }
                       >
                         {Number(
@@ -121,8 +122,8 @@ export default function TableComponent() {
                         className={
                           Number(data.price_change_percentage_24h_in_currency) >
                           0
-                            ? "py-4 text-green"
-                            : "py-4 text-red"
+                            ? "lg:table-cell hidden py-4 text-green"
+                            : "lg:table-cell hidden py-4 text-red"
                         }
                       >
                         {Number(
@@ -133,8 +134,8 @@ export default function TableComponent() {
                         className={
                           Number(data.price_change_percentage_7d_in_currency) >
                           0
-                            ? "py-4 text-green"
-                            : "py-4 text-red"
+                            ? "lg:table-cell hidden py-4 text-green"
+                            : "lg:table-cell hidden py-4 text-red"
                         }
                       >
                         {Number(
@@ -146,7 +147,20 @@ export default function TableComponent() {
                 })
               : null}
           </tbody>
-        </table>
+        </table> 
+        :
+        <div
+                className="w-full h-full min-h-[60vh] flex justify-center items-center
+                 "
+              >
+                <div
+                  className="w-8 h-8 border-4 border-cyan rounded-full
+                 border-b-gray-200 animate-spin"
+                  role="status"
+                />
+                <span className="ml-2">Please Wait...</span>
+              </div>  
+        }
       </div>
       <div className=" flex justify-between items-center mt-4 capitalize h-[2rem]">
         <span>
