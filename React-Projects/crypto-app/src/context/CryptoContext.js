@@ -13,11 +13,14 @@ export function CryptoProvider({ children }) {
   const [page, setPage] = useState(1);
   const [ totalPages, setTotalPages] = useState(250);
   const [perPage, setPerPage] = useState(10)
-  const [ coinData, setCoinData] = useState()
+  const [ coinData, setCoinData] = useState();
+
+  const [error, setError] = useState({ data: "", coinData: "", search: "" });
 
   
 
   async function getData() {
+    setError({ ...error, data: "" });
     setCryptoData();
     setTotalPages(250);
     // try {
@@ -35,7 +38,14 @@ export function CryptoProvider({ children }) {
       const data = await fetch(
         `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency}&ids=${coinSearch}&order=${sortBy}&per_page=${perPage}&page=${page}&sparkline=false&price_change_percentage=1h%2C24h%2C7d&locale=en&x_cg_demo_api_key=CG-xPTDuU1xWf9V99UybnaCu79t`
       )
-        .then((res) => res.json())
+        .then( async (res) => {
+          if (res.ok) {
+            return res.json();
+          }
+          const errorResponse = await res.json();
+          setError({ ...error, data: errorResponse.error });
+          throw new Error(errorResponse.error);
+        })
         .then((json) => json);
 
       setCryptoData(data);
@@ -105,6 +115,7 @@ export function CryptoProvider({ children }) {
         perPage,
         coinData,
         getCoinData,
+        error
       }}
     >
       {children}

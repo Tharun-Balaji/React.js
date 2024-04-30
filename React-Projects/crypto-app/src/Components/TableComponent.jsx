@@ -50,125 +50,135 @@ function SaveButton({ data }) {
   );
 }
 export default function TableComponent() {
-  const { CryptoData, currency } = useContext(CryptoContext);
+  const { CryptoData, currency, error  } = useContext(CryptoContext);
   // console.log(test);
 
   return (
     <>
       <div className=" flex flex-col mt-9 border border-gray-100 rounded">
-        { CryptoData ?
+        {CryptoData ? (
           <table className=" w-full table-auto ">
-          <thead className=" capitalize text-base text-gray-100 font-medium border-b border-gray-100">
-            <tr>
-              <th className=" py-1">assets</th>
-              <th className=" py-1">name</th>
-              <th className=" py-1">price</th>
-              <th className=" py-1">Total Volume</th>
-              <th className=" py-1">Market Cap</th>
-              <th className=" py-1 lg:table-cell hidden">1Hr</th>
-              <th className=" py-1 lg:table-cell hidden">24Hr</th>
-              <th className=" py-1 lg:table-cell hidden">7D</th>
-            </tr>
-          </thead>
-          <tbody>
-            {CryptoData
-              ? CryptoData.map(function (data) {
-                  return (
-                    <tr
-                      key={data.id}
-                      className=" text-center text-base border-b border-gray-100 hover:bg-gray-200 last:border-b-0"
-                    >
-                      <td className=" py-4 flex items-center uppercase">
-                        <SaveButton data={data} />
-                        <img
-                          className=" w-[1.2rem] h-[1.2rem] mx-1.5 "
-                          src={data.image}
-                          alt={data.name}
-                        />
-                        <span>
+            <thead className=" capitalize text-base text-gray-100 font-medium border-b border-gray-100">
+              <tr>
+                <th className=" py-1">assets</th>
+                <th className=" py-1">name</th>
+                <th className=" py-1">price</th>
+                <th className=" py-1">Total Volume</th>
+                <th className=" py-1">Market Cap</th>
+                <th className=" py-1 lg:table-cell hidden">1Hr</th>
+                <th className=" py-1 lg:table-cell hidden">24Hr</th>
+                <th className=" py-1 lg:table-cell hidden">7D</th>
+              </tr>
+            </thead>
+            <tbody>
+              {CryptoData
+                ? CryptoData.map(function (data) {
+                    return (
+                      <tr
+                        key={data.id}
+                        className=" text-center text-base border-b border-gray-100 hover:bg-gray-200 last:border-b-0"
+                      >
+                        <td className=" py-4 flex items-center uppercase">
+                          <SaveButton data={data} />
+                          <img
+                            className=" w-[1.2rem] h-[1.2rem] mx-1.5 "
+                            src={data.image}
+                            alt={data.name}
+                          />
+                          <span>
+                            <Link to={`${data.id}`} className="cursor-pointer">
+                              {data.symbol}
+                            </Link>
+                          </span>
+                        </td>
+                        <td className=" py-4">
                           <Link to={`${data.id}`} className="cursor-pointer">
-                            {data.symbol}
+                            {data.name}
                           </Link>
-                        </span>
-                      </td>
-                      <td className=" py-4">
-                        <Link to={`${data.id}`} className="cursor-pointer">
-                          {data.name}
-                        </Link>
-                      </td>
-                      <td className=" py-4">
-                        {new Intl.NumberFormat("en-In", {
-                          style: "currency",
-                          currency: currency,
-                        }).format(data.current_price)}
-                      </td>
-                      <td className=" py-4">{data.total_volume}</td>
-                      <td className=" py-4">
-                        {data.market_cap_change_percentage_24h}%
-                      </td>
-                      <td
-                        className={
-                          Number(data.price_change_percentage_1h_in_currency) >
-                          0
-                            ? "lg:table-cell hidden py-4 text-green"
-                            : "lg:table-cell hidden py-4 text-red"
-                        }
-                      >
-                        {Number(
-                          data.price_change_percentage_1h_in_currency
-                        ).toFixed(2)}
-                      </td>
-                      <td
-                        className={
-                          Number(data.price_change_percentage_24h_in_currency) >
-                          0
-                            ? "lg:table-cell hidden py-4 text-green"
-                            : "lg:table-cell hidden py-4 text-red"
-                        }
-                      >
-                        {Number(
-                          data.price_change_percentage_24h_in_currency
-                        ).toFixed(2)}
-                      </td>
-                      <td
-                        className={
-                          Number(data.price_change_percentage_7d_in_currency) >
-                          0
-                            ? "lg:table-cell hidden py-4 text-green"
-                            : "lg:table-cell hidden py-4 text-red"
-                        }
-                      >
-                        {Number(
-                          data.price_change_percentage_7d_in_currency
-                        ).toFixed(2)}
-                      </td>
-                    </tr>
-                  );
-                })
-              : null}
-          </tbody>
-        </table> 
-        :
-        <div
-                className="w-full h-full min-h-[60vh] flex justify-center items-center
-                 "
-              >
-                <div
-                  className="w-8 h-8 border-4 border-cyan rounded-full
-                 border-b-gray-200 animate-spin"
-                  role="status"
-                />
-                <span className="ml-2">Please Wait...</span>
-              </div>  
-        }
+                        </td>
+                        <td className=" py-4">
+                          {new Intl.NumberFormat("en-In", {
+                            style: "currency",
+                            currency: currency,
+                          }).format(data.current_price)}
+                        </td>
+                        <td className=" py-4">{data.total_volume}</td>
+                        <td className=" py-4">
+                          {data.market_cap_change_percentage_24h}%
+                        </td>
+                        <td
+                          className={
+                            Number(
+                              data.price_change_percentage_1h_in_currency
+                            ) > 0
+                              ? "lg:table-cell hidden py-4 text-green"
+                              : "lg:table-cell hidden py-4 text-red"
+                          }
+                        >
+                          {Number(
+                            data.price_change_percentage_1h_in_currency
+                          ).toFixed(2)}
+                        </td>
+                        <td
+                          className={
+                            Number(
+                              data.price_change_percentage_24h_in_currency
+                            ) > 0
+                              ? "lg:table-cell hidden py-4 text-green"
+                              : "lg:table-cell hidden py-4 text-red"
+                          }
+                        >
+                          {Number(
+                            data.price_change_percentage_24h_in_currency
+                          ).toFixed(2)}
+                        </td>
+                        <td
+                          className={
+                            Number(
+                              data.price_change_percentage_7d_in_currency
+                            ) > 0
+                              ? "lg:table-cell hidden py-4 text-green"
+                              : "lg:table-cell hidden py-4 text-red"
+                          }
+                        >
+                          {Number(
+                            data.price_change_percentage_7d_in_currency
+                          ).toFixed(2)}
+                        </td>
+                      </tr>
+                    );
+                  })
+                : null}
+            </tbody>
+          </table>
+        ) : (!error.data && !error.search) ? (
+          <div className="w-full min-h-[50vh] flex justify-center items-center">
+            <div
+              className="w-8 h-8 border-4 border-solid border-cyan rounded-full border-b-gray-200 animate-spin"
+              role="status"
+            />
+            <span className="text-base ml-2">please wait...</span>
+          </div>
+        ) : error.data || error.search ? (
+          <h1 className="min-h-[60vh] text-lg text-red flex items-center justify-center ">
+            {error.data
+              ? error.data
+              : error.search
+              ? error.search
+              : "Something unexpected happened!"}
+              {/* Here we have use multi chain conditions using ternary operator/ this is not
+              covered in the video but for the example and some improvements */}
+          </h1>
+        ) : null}
       </div>
-      <div className=" flex justify-between items-center mt-4 capitalize h-[2rem]">
+      <div className="flex items-center justify-between mt-4 capitalize h-[2rem]">
         <span>
-          Data Provided by{" "}
+          Data provided by{" "}
           <a
-            className=" text-cyan"
+            className="text-cyan"
             href="http://www.coingecko.com"
-            target="blank"
+            rel="noreferrer"
+            target={"_blank"}
           >
             CoinGecko
           </a>
@@ -177,4 +187,6 @@ export default function TableComponent() {
       </div>
     </>
   );
-}
+};
+
+
