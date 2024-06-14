@@ -1,5 +1,6 @@
 import HomePage from "./routes/homepage/HomePage";
 import ListPage from "./routes/listpage/ListPage";
+import ProfilePage from "./routes/profilePage/ProfilePage";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Layout from "./routes/layout/Layout.jsx";
 import SinglePage from './routes/singlePage/SinglePage';
@@ -13,18 +14,22 @@ function App() {
 			children: [
 				{
 					path: "/",
-					element: <HomePage />
+					element: <HomePage />,
 				},
 				{
 					path: "/list",
-					element: <ListPage />
+					element: <ListPage />,
 				},
 				{
 					path: "/:id",
-					element: <SinglePage/>
-				}
-			]
-		}
+					element: <SinglePage />,
+				},
+				{
+					path: "/profile",
+					element: <ProfilePage />,
+				},
+			],
+		},
 	]);
 
 	return (
