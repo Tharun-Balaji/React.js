@@ -19,6 +19,16 @@
     z-index: 1;
 }
 
+@keyframes textReveal {
+    0% {
+        background-position: -500%;
+    }
+
+    100% {
+        background-position: 500%;
+    }
+}
+
 .title {
     font-size: 72px;
     font-weight: 900;
@@ -29,13 +39,77 @@
             rgba(255, 255, 255, 0) 120%);
     -webkit-text-fill-color: transparent;
     -webkit-background-clip: text;
+
+        /* Animation properties */
+            animation: textReveal 5s linear infinite alternate;
+            background-size: 200% auto;
 }
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes colorPulse {
+
+    0%,
+    100% {
+        color: rgba(255, 255, 255, 1);
+    }
+
+    50% {
+        color: rgba(255, 255, 255, 0.7);
+    }
+}
+
+@keyframes subtleRotate {
+
+    0%,
+    100% {
+        transform: rotate(0deg);
+    }
+
+    50% {
+        transform: rotate(0.5deg);
+    }
+}
+
+@keyframes shadowPulse {
+
+    0%,
+    100% {
+        text-shadow: 0 0 5px rgba(255, 255, 255, 0.1);
+    }
+
+    50% {
+        text-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+    }
+}
+
 
 .description {
     font-size: 30px;
     font-family: var(--font-roboto);
     margin-bottom: 52px;
-}
+
+    /* Animation properties */
+    opacity: 0;
+        animation:
+         fadeIn 1s ease-out forwards,
+        colorPulse 4s ease-in-out infinite,
+        shadowPulse 4s ease-in-out infinite;
+} 
+
+
+
+
 
 .contactBtn {
     text-decoration: none;
@@ -59,16 +133,24 @@
 }
 
 @keyframes floating {
-    0% {
-        transform: translate(0, 0px);
+0% {
+        transform: translateY(0) scale(1) rotate(0deg);
+    }
+
+    25% {
+        transform: translateY(-10px) scale(1.05) rotate(2deg);
     }
 
     50% {
-        transform: translate(0, 10px);
+        transform: translateY(0) scale(1.1) rotate(0deg);
+    }
+
+    75% {
+        transform: translateY(10px) scale(1.05) rotate(-2deg);
     }
 
     100% {
-        transform: translate(0, -0px);
+        transform: translateY(0) scale(1) rotate(0deg);
     }
 }
 
