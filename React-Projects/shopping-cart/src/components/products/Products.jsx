@@ -1,4 +1,5 @@
 import Product from "../product/Product";
+import "./Products.css";
 const DUMMY_PRODUCTS = [
 	{
 		id: 1,

@@ -8,3 +8,10 @@
   flex-wrap: wrap;
 }
 
+ul {
+  list-style-type: none;
+}
+
+li {
+  padding: 10px;
+}
