@@ -20,7 +20,7 @@ const cartSlice = createSlice({
       // if already exists
       if (existingItem) {
         existingItem.quantity++;
-        existingItem.price += newItem.price;
+        existingItem.totalPrice += newItem.price;
       } else { // if not exists
         state.itemsList.push({
           id: newItem.id,
@@ -29,6 +29,9 @@ const cartSlice = createSlice({
           totalPrice: newItem.price,
           name: newItem.name,
         });
+
+        // increment total quantity
+        state.totalQuantity++;
       }
 
     },
