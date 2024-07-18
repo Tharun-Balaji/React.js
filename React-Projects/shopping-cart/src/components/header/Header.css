@@ -14,3 +14,14 @@
   font-family: monospace;
   font-size: 30px;
 }
+
+.logout-btn {
+  padding: 10px;
+  background: orangered;
+  border:none;
+  margin-top: 3.5px;
+}
+
+.logout-btn:hover{
+  background: rgb(0, 6, 59);
+}
