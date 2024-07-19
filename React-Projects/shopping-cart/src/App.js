@@ -4,30 +4,36 @@ import Auth from './components/auth/Auth';
 import Layout from './components/layout/Layout';
 import { useEffect } from 'react';
 import Notification from './components/notification/Notification';
+import { useDispatch } from 'react-redux';
+import { uiActions } from './store/ui-slice';
+import { sendCartData } from './store/cart-slice';
+let isFirstRender = true;
 
 function App() {
 
+  const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
+  const notification = useSelector((state) => state.ui.notification);
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+ 
 
   useEffect(() => {
 
-    const sendRequest = async () => { 
+    if (isFirstRender) {
+      isFirstRender = false;
+      return;
+    }
 
-      const res = await fetch("https://redux-http-b0a0d-default-rtdb.firebaseio.com/cartItems.json", {
-        method: "PUT",
-        body: JSON.stringify(cart.itemsList),
-      });
+    dispatch(sendCartData(cart));
 
-      const data = await res.json();
-    };
+  },[cart,dispatch])
 
-    sendRequest();
-  },[cart])
 
   return (
     <div className="App">
-      <Notification type="success" message="Item added to cart" />
+      {notification && (
+        <Notification type={notification.type} message={notification.message} />
+      )}
       {!isLoggedIn && <Auth />}
       {isLoggedIn && <Layout />}
     </div>

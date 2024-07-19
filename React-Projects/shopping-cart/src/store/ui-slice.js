@@ -1,4 +1,5 @@
-import { createSlice } from "react-redux";
+import { createSlice } from "@reduxjs/toolkit";
+
 
 const uiSlice = createSlice({
   name: "ui",
