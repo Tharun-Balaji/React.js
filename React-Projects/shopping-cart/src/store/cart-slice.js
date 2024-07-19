@@ -7,10 +7,12 @@ const cartSlice = createSlice({
   initialState: {
     itemsList :[],
     totalQuantity: 0,
-    showCart: false
+    showCart: false,
+    changed: false
   },
   reducers: {
     addToCart(state, action) { 
+      state.changed = true;
       const newItem = action.payload; // new item
 
       // check if the item already exists in the cart
@@ -37,6 +39,7 @@ const cartSlice = createSlice({
 
     },
     removeFromCart(state, action) {
+      state.changed = true;
       const id = action.payload;
 
       const existingItem = state.itemsList.find((item) => item.id === id);
@@ -51,49 +54,12 @@ const cartSlice = createSlice({
     setShowCart(state) {
       state.showCart = !state.showCart;
     },
+    replaceData(state, action) {
+      state.totalQuantity = action.payload.totalQuantity;
+      state.itemsList = action.payload.itemsList;
+    },
   },
 });
-
-export const sendCartData =  (cart) => { 
-  return async (dispatch) => {
-    dispatch(uiActions.showNotification({
-      open: true,
-      type: "info",
-      message: "Sending request..."
-    }));
-
-    const sendRequest = async () => {
-
-      // set state as sending request
-
-
-      const res = await fetch("https://redux-http-b0a0d-default-rtdb.firebaseio.com/cartItems.json", {
-        method: "PUT",
-        body: JSON.stringify(cart.itemsList),
-      });
-
-      const data = await res.json();
-
-      // set state as successful
-      dispatch(uiActions.showNotification({
-        open: true,
-        type: "success",
-        message: "Request sent successfully!"
-      }));
-    };
-
-    try {
-      await sendRequest();
-    } catch (error) {
-      dispatch(uiActions.showNotification({
-        open: true,
-        type: "error",
-        message: "Sending request failed!"
-      }));
-    }
-
-  };
-};
 
 export const cartActions = cartSlice.actions;
 export default cartSlice;

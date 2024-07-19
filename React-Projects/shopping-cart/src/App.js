@@ -6,7 +6,7 @@ import { useEffect } from 'react';
 import Notification from './components/notification/Notification';
 import { useDispatch } from 'react-redux';
 import { uiActions } from './store/ui-slice';
-import { sendCartData } from './store/cart-slice';
+import { fetchData, sendCartData } from './store/cart-actions';
 let isFirstRender = true;
 
 function App() {
@@ -16,6 +16,9 @@ function App() {
   const notification = useSelector((state) => state.ui.notification);
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
  
+  useEffect(() => {
+    dispatch(fetchData())
+  },[dispatch])
 
   useEffect(() => {
 
@@ -24,7 +27,9 @@ function App() {
       return;
     }
 
-    dispatch(sendCartData(cart));
+    if (cart.changed) {
+      dispatch(sendCartData(cart));
+    }
 
   },[cart,dispatch])
 
