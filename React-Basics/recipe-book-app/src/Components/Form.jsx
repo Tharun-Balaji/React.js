@@ -317,7 +317,7 @@ function RecipeForm() {
             placeholder="Enter a short description"
             value={recipeData.description}
             onChange={handleInputChange}
-          />
+          ></textarea>
         </div>
         <div className="mb-4">
           <label className="block text-gray-700 font-bold mb-2" htmlFor="imageUrl">
@@ -383,7 +383,7 @@ function RecipeForm() {
             placeholder="Enter instructions"
             value={recipeData.instructions}
             onChange={handleInputChange}
-          />
+          ></textarea>
         </div>
         <div className="flex items-center justify-between">
           <button

@@ -1,54 +1,50 @@
 // import logo from './logo.svg';
 // import './App.css';
 // import Login from './Components/Login/Login';
-import React, { useEffect, useReducer, useState } from 'react';
+import React, { useEffect, useReducer, useState } from "react";
 
 const initialState = { count: 0 };
 
 function reducer(state, action) {
   switch (action.type) {
-    case 'INCREMENT':
+    case "INCREMENT":
       return { count: state.count + 1 };
-    case 'DECREMENT':
+    case "DECREMENT":
       return { count: state.count - 1 };
     default:
       return state;
   }
 }
 
-
 function App() {
-  const [state, setState] = useState("");
+  const [time, setTime] = useState(0);
 
-  // const decrement = () => {
-  //   dispatch({ type: 'DECREMENT' });
-  //   dispatch({ type: 'DECREMENT' });
-  // };
+  useEffect(() => {
+    let interval = setInterval(() => {
+      setTime((prev) => ++prev);
+    }, 1000);
 
-  useEffect( () => {
-    const debounce = setTimeout(() => {
-      console.log(state)
-    }, 500);
-      console.log(debounce);
     return () => {
-      clearTimeout(debounce);
+      clearInterval(interval);
     };
-  }, [state] )
+  }, []);
+
+  const min = Math.floor(time / 60);
+  const sec = Math.floor(time % 60);
+
+  function handleClick(e) {
+    e.preventDefault();
+    setTime(0);
+  }
+
+  function Time_formatter(time) {
+    return time < 9 ? `0${time}` : `${time}`;
+  }
 
   return (
-    <div style={{
-      display : "flex",
-      flexDirection: "column",
-      alignItems : "center",
-      justifyContent : "center",
-      height : "100vh",
-      width : "100vw",
-    }} >
-      <input 
-       value={state}
-       onChange={(e) => setState(e.target.value)}
-      />
-      <p>{state}</p>
+    <div>
+      <p>{`${Time_formatter(min)} : ${Time_formatter(sec)}`}</p>
+      <button onClick={handleClick}>Reset</button>
     </div>
   );
 }

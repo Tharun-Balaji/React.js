@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-  <title>Render HTML Tree</title>
-</head>
-<body>
-  <div id="root"></div>
   <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
   <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+  <title>Render HTML Tree</title>
+</head>
+
+<body>
+  <div id="root"></div>
+  
 
   <script>
     const obj = {
@@ -50,7 +53,7 @@
       }
 
       // Create the element
-      const { type, props } = node;
+      // const { type, props } = node;  
       // const { children } = props;
       // const element = document.createElement(type);
 
@@ -64,14 +67,14 @@
       // }
 
       // Render the children recursively
-    //   if (children) {
-    //     for (let child of children) {
-    //       const childNode = render(child);
-    //       element.appendChild(childNode);
-    //     }
-    //   }
+      //   if (children) {
+      //     for (let child of children) {
+      //       const childNode = render(child);
+      //       element.appendChild(childNode);
+      //     }
+      //   }
 
-    //   return element;
+      //   return element;
       //   let children = [];
       //   if (props.children) {
       //     console.log(props.children);
@@ -95,7 +98,7 @@
         return node.map(render);
       }
 
-        return React.createElement(node.type, node.props, ...render(node.props.children));
+      return React.createElement(node.type, node.props, ...render(node.props.children));
 
     }
 
@@ -106,4 +109,5 @@
     rootElement.render(renderedTree);
   </script>
 </body>
+
 </html>

@@ -10,7 +10,7 @@ const MyComponent = ({ items }) => {
   );
 };
 
-const Appp = () => {
+const Test = () => {
   const products = [
     { id: 1, name: 'Product A' },
     { id: 2, name: 'Product B' },
@@ -20,4 +20,4 @@ const Appp = () => {
   return <MyComponent items={products} />;    
 };
 
-export default Appp;
+export default Test;
