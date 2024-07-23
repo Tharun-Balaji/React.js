@@ -4,8 +4,9 @@ import './index.css';
 import App from './App';
 import { store } from './app/store';
 import { fetchUsers } from  "./features/Users/usersSlice";
+import { extendedApiSlice } from './features/posts/postsSlice';
 
-
+store.dispatch(extendedApiSlice.endpoints.getPosts.initiate());
 store.dispatch(fetchUsers());
 
 
