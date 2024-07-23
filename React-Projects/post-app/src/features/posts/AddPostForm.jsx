@@ -68,7 +68,7 @@ const AddPostForm = () => {
                     name="postContent"
                     value={content}
                     onChange={onContentChanged}
-                />
+                ></textarea>
                 <button
                     type="button"
                     onClick={onSavePostClicked}

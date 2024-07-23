@@ -24,9 +24,6 @@ export default function Header() {
 						<Link to="user">Users</Link>
 					</li>
         </ul>
-        <button onClick={() => dispatch(increaseCount())} >
-          {count}
-        </button>
 			</nav>
 		</header>
   );

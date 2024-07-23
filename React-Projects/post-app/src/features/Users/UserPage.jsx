@@ -17,10 +17,10 @@ export default function UserPage() {
   </li>);
 
   return (
-    <section>
-      <h2>{user.name}</h2>
+		<section className="user-page">
+			<h2>{user.name}</h2>
 
-      <ul>{postTitles}</ul>
-    </section>
-  )
+			<ul>{postTitles}</ul>
+		</section>
+  );
 }

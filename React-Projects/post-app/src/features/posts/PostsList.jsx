@@ -1,12 +1,12 @@
 import { useSelector, useDispatch } from "react-redux";
-import { selectAllPosts, getPostsStatus, getPostsError, fetchPosts } from "./postsSlice";
+import { selectPostIds, getPostsStatus, getPostsError, fetchPosts } from "./postsSlice";
 import { useEffect } from "react";
 import PostsExcerpt from "./PostsExcerpt";
 
 const PostsList = () => {
     const dispatch = useDispatch();
 
-    const posts = useSelector(selectAllPosts);
+    const orderedPosts = useSelector(selectPostIds);
     const postStatus = useSelector(getPostsStatus);
     const error = useSelector(getPostsError);
 
@@ -23,18 +23,17 @@ const PostsList = () => {
             <div>Please Wait while We are Fetching Data</div>
         )
     }
-    // let content;
+    let content;
     if (postStatus === "loading") {
-      return (<p>Loading...</p>);
+        content = <p>Loading...</p>
     } else if (postStatus === "succeeded") {
-      return ( posts
-        .slice()
-        .sort((a, b) => b.date.localeCompare(a.date))
-        .map((post) => <PostsExcerpt key={post.id} post={post} />))
+        content = orderedPosts.map((postId) => <PostsExcerpt key={postId} postId={postId} />)
     } else if (postStatus === "failed") {
-      return <p>{error}</p>;
+        content = <p>{error}</p>;
     }
 
-    
+    return <section>
+        {content}
+    </section>
 }
 export default PostsList

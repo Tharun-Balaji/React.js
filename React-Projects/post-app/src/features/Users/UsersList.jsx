@@ -13,10 +13,9 @@ export default function UsersList() {
   );
 
   return (
-    <section>
-      <h2>Users</h2>
-
-      <ul>{ renderUsers }</ul>
-    </section>
-  )
+		<section className="users-list">
+			<h2>Users</h2>
+			<ul>{renderUsers}</ul>
+		</section>
+  );
 }
