@@ -41,7 +41,7 @@ const AddPostForm = () => {
 	));
 
 	return (
-		<section className="bg-gray-100 px-4 py-8 rounded-lg shadow-md mx-auto max-w-md">
+		<section className="bg-gray-100 px-4 py-8 rounded-lg shadow-md mx-auto max-w-md  mt-16">
 			<h2 className="text-2xl font-bold mb-4 text-center">
 				Add a New Post
 			</h2>
