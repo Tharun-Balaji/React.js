@@ -140,7 +140,9 @@ export const {
 } = extendedApiSlice;
 
 // returns the query result object
+// This code block defines a selector function named selectPostsResult that extracts the result of the getPosts endpoint from extendedApiSlice.
 export const selectPostsResult = extendedApiSlice.endpoints.getPosts.select()
+
 
 // Creates memoized selector
 const selectPostsData = createSelector(
