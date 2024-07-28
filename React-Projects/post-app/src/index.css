@@ -133,7 +133,7 @@ textarea {
 } */
 
 
-:root {
+/* :root {
   --primary-color: #6200ea;
   --secondary-color: #b388ff;
   --text-color: #333;
@@ -180,7 +180,7 @@ select {
   top: 0;
   z-index: 1000;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-} */
+} 
 
 nav ul {
   list-style-type: none;
@@ -287,7 +287,7 @@ textarea {
   /* header {
     flex-direction: column;
     align-items: flex-start;
-  } */
+  } 
 
   nav {
     margin-top: 1rem;
@@ -624,7 +624,7 @@ button:focus {
 
 .link{
   background-color: #4CAF50;
-    /* Green */
+    /* Green 
     border: none;
     color: white;
     padding: 8px 16px;
@@ -635,4 +635,8 @@ button:focus {
     margin: 4px 2px;
     cursor: pointer;
     border-radius: 4px;
-}
+} */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

@@ -12,7 +12,7 @@ const PostsList = () => {
 		content = <p className="text-center py-4">Loading...</p>;
 	} else if (isSuccess) {
 		content = (
-			<ul className="list-none space-y-4 px-4">
+			<ul className="list-none space-y-4 w-full px-4">
 				{orderedPosts.map((postId) => (
 					<PostsExcerpt key={postId} postId={postId} />
 				))}
@@ -23,7 +23,7 @@ const PostsList = () => {
 	}
 
 	return (
-		<section className="bg-gray-100 rounded-lg shadow-md px-4 py-8 mx-auto max-w-md mt-16">
+		<section className="rounded-lg flex justify-center items-center shadow-md px-2 py-8 mx-auto max-w-md mt-16">
 			{content}
 		</section>
 	);

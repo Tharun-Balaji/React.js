@@ -1,25 +1,28 @@
-
 import { Link } from "react-router-dom";
 
-
 export default function Header() {
-
-  return (
-		<header className="Header">
-			<h1>Redux Blog</h1>
+	return (
+		<header className="bg-gray-800 text-white px-4 py-6 flex justify-between items-center">
+			<h1 className="text-2xl font-bold">Redux Blog</h1>
 			<nav>
-				<ul>
+				<ul className="flex space-x-4">
 					<li>
-						<Link to="/">Home</Link>
+						<Link to="/" className="hover:text-gray-400">
+							Home
+						</Link>
 					</li>
 					<li>
-						<Link to="post">Post</Link>
+						<Link to="/post" className="hover:text-gray-400">
+							Posts
+						</Link>
 					</li>
 					<li>
-						<Link to="user">Users</Link>
+						<Link to="users" className="hover:text-gray-400">
+							Users
+						</Link>
 					</li>
-        </ul>
+				</ul>
 			</nav>
 		</header>
-  );
+	);
 }

@@ -3,11 +3,11 @@ import Header from "./Header";
 
 export default function Layout() {
   return (
-    <>
-    <Header/>   
-    <main className="App">
-      <Outlet />
-    </main>
-    </>
+		<>
+			<Header />
+			<main>
+				<Outlet />
+			</main>
+		</>
   );
 }
