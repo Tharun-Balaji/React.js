@@ -4,9 +4,9 @@ import { Link } from "react-router-dom";
 
 const PostAuthor = ({ userId }) => {
 
-     const { user: author } = useGetUsersQuery("getUsers", {
+     const { author } = useGetUsersQuery("getUsers", {
 			selectFromResult: ({ data, isLoading }) => ({
-				user: data?.entities[userId],
+				author: data?.entities[userId],
 			}),
 		});
 

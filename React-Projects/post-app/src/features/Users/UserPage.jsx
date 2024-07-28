@@ -1,11 +1,24 @@
-import { useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
-import { selectUserById } from "./usersSlice";
+import {  useGetUsersQuery } from "./usersSlice";
 import { useGetPostsByUserIdQuery } from "../posts/postsSlice";
 
 export default function UserPage() {
 	const { userId } = useParams();
-	const user = useSelector((state) => selectUserById(state, Number(userId)));
+	const {
+		user,
+		isLoading: isLoadingUser,
+		isSuccess: isSuccessUser,
+		isError: isErrorUser,
+		error: errorUser,
+	} = useGetUsersQuery("getUsers", {
+		selectFromResult: ({ data, isLoading, isSuccess, isError, error }) => ({
+			user: data?.entities[userId],
+			isLoading,
+			isSuccess,
+			isError,
+			error,
+		}),
+	});
 
 	const {
 		data: postsForUsers,
@@ -16,9 +29,9 @@ export default function UserPage() {
 	} = useGetPostsByUserIdQuery(userId);
 
 	let content;
-	if (isLoading) {
+	if (isLoading || isLoadingUser) {
 		content = <p className="text-center text-gray-500">Loading...</p>;
-	} else if (isSuccess) {
+	} else if (isSuccess && isSuccessUser) {
 		const { ids, entities } = postsForUsers;
 		content = ids.map((id) => (
 			<li
@@ -33,8 +46,8 @@ export default function UserPage() {
 				</Link>
 			</li>
 		));
-	} else if (isError) {
-		content = <p className="text-center text-red-500">{error}</p>;
+	} else if (isError || isErrorUser) {
+		content = <p className="text-center text-red-500">{error || errorUser}</p>;
 	}
 
 	return (
