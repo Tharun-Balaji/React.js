@@ -1,6 +1,7 @@
 import { Link, useParams } from "react-router-dom";
 import {  useGetUsersQuery } from "./usersSlice";
 import { useGetPostsByUserIdQuery } from "../posts/postsSlice";
+import Loading from "../../components/Loading";
 
 export default function UserPage() {
 	const { userId } = useParams();
@@ -30,7 +31,7 @@ export default function UserPage() {
 
 	let content;
 	if (isLoading || isLoadingUser) {
-		content = <p className="text-center text-gray-500">Loading...</p>;
+		content = <Loading />;
 	} else if (isSuccess && isSuccessUser) {
 		const { ids, entities } = postsForUsers;
 		content = ids.map((id) => (

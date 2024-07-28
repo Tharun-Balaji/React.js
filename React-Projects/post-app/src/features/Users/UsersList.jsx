@@ -1,4 +1,5 @@
 
+import Loading from "../../components/Loading";
 import { useGetUsersQuery } from "./usersSlice";
 import { Link } from "react-router-dom";
 
@@ -13,7 +14,7 @@ export default function UsersList() {
 
 	let content;
 	if (isLoading) {
-		content = <p>"Loading..."</p>;
+		content = <Loading />;
 	} else if (isSuccess) {
 		const renderedUsers = users.ids.map((userId) => (
 			<li

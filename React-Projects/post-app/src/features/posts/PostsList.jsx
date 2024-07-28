@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux";
 import { selectPostIds, useGetPostsQuery } from "./postsSlice";
 import PostsExcerpt from "./PostsExcerpt";
+import Loading from "../../components/Loading";
 
 const PostsList = () => {
 	const { isLoading, error, isSuccess, isError } = useGetPostsQuery();
@@ -9,7 +10,7 @@ const PostsList = () => {
 
 	let content;
 	if (isLoading) {
-		content = <p className="text-center py-4">Loading...</p>;
+		content = <Loading />;
 	} else if (isSuccess) {
 		content = (
 			<ul className="list-none space-y-4 w-full px-4">
