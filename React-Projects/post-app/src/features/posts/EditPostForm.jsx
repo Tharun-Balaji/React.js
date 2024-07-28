@@ -75,7 +75,7 @@ const EditPostForm = () => {
 	));
 
 	return (
-		<section className="p-6 bg-white rounded-lg shadow-md">
+		<section className="h-full p-6 bg-white rounded-lg shadow-md mt-auto border">
 			<h2 className="text-2xl font-bold mb-4">Edit Post</h2>
 			<form className="space-y-4">
 				<div>
@@ -117,8 +117,8 @@ const EditPostForm = () => {
 						name="postContent"
 						value={content}
 						onChange={onContentChanged}
-						className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500"
-					/>
+						className="h-[20vh] w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500"
+					></textarea>
 				</div>
 				<div className="flex space-x-4">
 					<button

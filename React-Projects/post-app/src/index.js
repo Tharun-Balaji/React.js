@@ -3,13 +3,13 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import { store } from './app/store';
-import { fetchUsers } from  "./features/Users/usersSlice";
+import { usersApiSlice } from  "./features/Users/usersSlice";
 import { extendedApiSlice } from './features/posts/postsSlice';
 import { Provider } from 'react-redux';
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 
 store.dispatch(extendedApiSlice.endpoints.getPosts.initiate());
-store.dispatch(fetchUsers());
+store.dispatch(usersApiSlice.endpoints.getUsers.initiate());
 
 
 

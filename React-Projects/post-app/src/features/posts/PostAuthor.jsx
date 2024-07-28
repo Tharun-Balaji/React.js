@@ -1,12 +1,14 @@
-import { useSelector } from "react-redux";
-import { selectAllUsers } from "../Users/usersSlice";
+import { useGetUsersQuery } from "../Users/usersSlice";
 import { Link } from "react-router-dom";
 
 
 const PostAuthor = ({ userId }) => {
-    const users = useSelector(selectAllUsers)
 
-    const author = users.find(user => user.id === userId);
+     const { user: author } = useGetUsersQuery("getUsers", {
+			selectFromResult: ({ data, isLoading }) => ({
+				user: data?.entities[userId],
+			}),
+		});
 
     return (
 		<span>
@@ -16,4 +18,4 @@ const PostAuthor = ({ userId }) => {
 		</span>
 	);
 }
-export default PostAuthor
+export default PostAuthor;
