@@ -17,7 +17,7 @@ export default function Header() {
 						</Link>
 					</li>
 					<li>
-						<Link to="users" className="hover:text-gray-400">
+						<Link to="/user" className="hover:text-gray-400">
 							Users
 						</Link>
 					</li>
