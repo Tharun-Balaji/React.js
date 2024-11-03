@@ -40,6 +40,7 @@
             rgba(255, 255, 255, 0) 120%);
     -webkit-text-fill-color: transparent;
     -webkit-background-clip: text;
+    background-clip: text;
 
         /* Animation properties */
             animation: textReveal 5s linear infinite alternate;
