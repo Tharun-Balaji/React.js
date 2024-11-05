@@ -74,79 +74,100 @@ export default function TableComponent() {
               {CryptoData
                 ? CryptoData.map(function (data) {
                     return (
-                      <tr
-                        key={data.id}
-                        className=" text-center text-base border-b border-gray-100 hover:bg-gray-200 last:border-b-0"
-                      >
-                        <td className=" py-4 flex items-center uppercase">
-                          <SaveButton data={data} />
-                          <img
-                            className=" w-[1.2rem] h-[1.2rem] mx-1.5 "
-                            src={data.image}
-                            alt={data.name}
-                          />
-                          <span>
-                            <Link to={`${data.id}`} className="cursor-pointer">
-                              {data.symbol}
-                            </Link>
-                          </span>
-                        </td>
-                        <td className=" py-4">
-                          <Link to={`${data.id}`} className="cursor-pointer">
-                            {data.name}
-                          </Link>
-                        </td>
-                        <td className=" py-4">
-                          {new Intl.NumberFormat("en-In", {
-                            style: "currency",
-                            currency: currency,
-                          }).format(data.current_price)}
-                        </td>
-                        <td className=" py-4">{data.total_volume}</td>
-                        <td className=" py-4">
-                          {data.market_cap_change_percentage_24h}%
-                        </td>
-                        <td
-                          className={
-                            Number(
-                              data.price_change_percentage_1h_in_currency
-                            ) > 0
-                              ? "lg:table-cell hidden py-4 text-green"
-                              : "lg:table-cell hidden py-4 text-red"
-                          }
-                        >
-                          {Number(
-                            data.price_change_percentage_1h_in_currency
-                          ).toFixed(2)}
-                        </td>
-                        <td
-                          className={
-                            Number(
-                              data.price_change_percentage_24h_in_currency
-                            ) > 0
-                              ? "lg:table-cell hidden py-4 text-green"
-                              : "lg:table-cell hidden py-4 text-red"
-                          }
-                        >
-                          {Number(
-                            data.price_change_percentage_24h_in_currency
-                          ).toFixed(2)}
-                        </td>
-                        <td
-                          className={
-                            Number(
-                              data.price_change_percentage_7d_in_currency
-                            ) > 0
-                              ? "lg:table-cell hidden py-4 text-green"
-                              : "lg:table-cell hidden py-4 text-red"
-                          }
-                        >
-                          {Number(
-                            data.price_change_percentage_7d_in_currency
-                          ).toFixed(2)}
-                        </td>
-                      </tr>
-                    );
+						<tr
+							key={data.id}
+							className=" text-center text-base border-b border-gray-100 hover:bg-gray-200 last:border-b-0"
+						>
+							<td className=" py-4 flex items-center uppercase">
+								<SaveButton data={data} />
+								<img
+									className=" w-[1.2rem] h-[1.2rem] mx-1.5 "
+									src={data.image}
+									alt={data.name}
+								/>
+								<span>
+									<Link
+										to={`${data.id}`}
+										className="cursor-pointer"
+									>
+										{data.symbol}
+									</Link>
+								</span>
+							</td>
+							<td className=" py-4">
+								<Link
+									to={`${data.id}`}
+									className="cursor-pointer"
+								>
+									{data.name}
+								</Link>
+							</td>
+							<td className=" py-4">
+								{(() => {
+									try {
+										const formatter = new Intl.NumberFormat(
+											"en-IN",
+											{
+												style: "currency",
+												currency: currency,
+											}
+										);
+										return formatter.format(
+											data.current_price
+										);
+									} catch (error) {
+										console.error(
+											"Error formatting currency:",
+											error
+										);
+									}
+								})()}
+							</td>
+							<td className=" py-4">{data.total_volume}</td>
+							<td className=" py-4">
+								{data.market_cap_change_percentage_24h}%
+							</td>
+							<td
+								className={
+									Number(
+										data.price_change_percentage_1h_in_currency
+									) > 0
+										? "lg:table-cell hidden py-4 text-green"
+										: "lg:table-cell hidden py-4 text-red"
+								}
+							>
+								{Number(
+									data.price_change_percentage_1h_in_currency
+								).toFixed(2)}
+							</td>
+							<td
+								className={
+									Number(
+										data.price_change_percentage_24h_in_currency
+									) > 0
+										? "lg:table-cell hidden py-4 text-green"
+										: "lg:table-cell hidden py-4 text-red"
+								}
+							>
+								{Number(
+									data.price_change_percentage_24h_in_currency
+								).toFixed(2)}
+							</td>
+							<td
+								className={
+									Number(
+										data.price_change_percentage_7d_in_currency
+									) > 0
+										? "lg:table-cell hidden py-4 text-green"
+										: "lg:table-cell hidden py-4 text-red"
+								}
+							>
+								{Number(
+									data.price_change_percentage_7d_in_currency
+								).toFixed(2)}
+							</td>
+						</tr>
+					);
                   })
                 : null}
             </tbody>
