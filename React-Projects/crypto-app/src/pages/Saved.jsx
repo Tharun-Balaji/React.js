@@ -55,7 +55,7 @@ export default function Saved() {
 
   const { savedData,resetSavedResult } = useContext(StorageContext);
   const {currency} = useContext(CryptoContext);
-  console.log(savedData);
+  // console.log(savedData);
 
   return (
     <section className="w-[80%] h-full flex flex-col mt-16 mb-24 relative">
