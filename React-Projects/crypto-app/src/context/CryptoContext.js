@@ -5,35 +5,36 @@ export const CryptoContext = createContext({});
 
 // Create Provider Component
 export function CryptoProvider({ children }) {
+  // State for storing the data from the API
   const [CryptoData, setCryptoData] = useState();
-  const [searchData, setSearchData] = useState();
-  const [coinSearch, setCoinSearch] = useState("");
-  const [currency, setCurrency] = useState("usd");
-  const [sortBy, setSortBy] = useState("market_cap_desc");
-  const [page, setPage] = useState(1);
-  const [ totalPages, setTotalPages] = useState(250);
-  const [perPage, setPerPage] = useState(10)
-  const [ coinData, setCoinData] = useState();
 
+  // State for storing the search results
+  const [searchData, setSearchData] = useState();
+
+  // State for storing the search query
+  const [coinSearch, setCoinSearch] = useState("");
+  // State for storing the currency
+  const [currency, setCurrency] = useState("usd");
+  // State for storing the sort by
+  const [sortBy, setSortBy] = useState("market_cap_desc");
+  // State for storing the page number
+  const [page, setPage] = useState(1);
+  // State for storing the total pages
+  const [totalPages, setTotalPages] = useState(250);
+  // State for storing the number of items per page
+  const [perPage, setPerPage] = useState(10);
+
+  // State for storing the coin data
+  const [coinData, setCoinData] = useState();
+
+  // State for storing the errors
   const [error, setError] = useState({ data: "", coinData: "", search: "" });
 
-  
-
+  // Function to get the data from the API
   async function getData() {
     setError({ ...error, data: "" });
     setCryptoData();
     setTotalPages(250);
-    // try {
-    //   const data = await fetch(
-    //     `https://api.coingecko.com/api/v3/exchanges/list&x_cg_demo_api_key=CG-xPTDuU1xWf9V99UybnaCu79t`
-    //   )
-    //     .then((res) => res.json())
-    //     .then((json) => json);
-
-    //   setTotalPages(data.length);
-    // } catch (error) {
-    //   console.log(error);
-    // }
     try {
       const data = await fetch(
         `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency}&ids=${coinSearch}&order=${sortBy}&per_page=${perPage}&page=${page}&sparkline=false&price_change_percentage=1h%2C24h%2C7d&locale=en&x_cg_demo_api_key=CG-xPTDuU1xWf9V99UybnaCu79t`
@@ -54,6 +55,7 @@ export function CryptoProvider({ children }) {
       console.log(error);
     }
   }
+  // Function to get the search results
   async function getSearchResult(query) {
     // console.log(query);
     try {
@@ -70,11 +72,13 @@ export function CryptoProvider({ children }) {
     }
   }
 
+  // Function to reset the state
   function resetFunction(){
     setPage(1);
     setCoinSearch("");
   }
 
+  // Function to get the coin data
   async function getCoinData(coinId) {
     setCoinData();
     try {
@@ -92,10 +96,12 @@ export function CryptoProvider({ children }) {
     }
   }
 
+  // Use the useEffect hook to call the function to get the data when the component mounts
   useEffect(() => {
     getData();
   }, [coinSearch, currency, sortBy,page, perPage]);
-  
+
+  // Return the context provider with the states and functions
   return (
     <CryptoContext.Provider
       value={{
@@ -123,3 +129,5 @@ export function CryptoProvider({ children }) {
     </CryptoContext.Provider>
   );
 }
+
+
