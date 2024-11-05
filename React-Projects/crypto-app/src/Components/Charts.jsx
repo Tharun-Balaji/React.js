@@ -64,7 +64,8 @@ export default function Charts({ id }) {
       `https://api.coingecko.com/api/v3/coins/${id}/market_chart?vs_currency=usd&days=${days}&interval=daily`
     )
       .then((res) => res.json())
-      .then((json) => json);
+      .then((json) => json)
+      .catch((error) => console.log(error));
 
     // console.log("chart-data", data);
 
