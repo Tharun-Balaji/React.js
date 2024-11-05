@@ -32,7 +32,7 @@ function HighLowIndicator({ currentPrice, low, high }) {
 
 export default function CryptoDetails() {
   const { coinID } = useParams();
-  console.log(coinID)
+  // console.log(coinID)
   const navigate = useNavigate();
   const { getCoinData, coinData: data, currency } = useContext(CryptoContext);
 
@@ -44,7 +44,7 @@ export default function CryptoDetails() {
     navigate("..");
   }
 
-  console.log(data);
+  // console.log(data);
   return ReactDOM.createPortal(
     <div
       className="fixed top-0 w-full h-full bg-gray-200 bg-opacity-30 backdrop-blur-sm flex items-center justify-center font-nunito"
