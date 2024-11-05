@@ -16,7 +16,7 @@ export function TrendingProvider({children}){
           .then((res) => res.json())
           .then((json) => json);
 
-        console.log(data);
+        // console.log(data);
         setTrendData(data.coins);
       } catch (error) {
         console.log(error);
