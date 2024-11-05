@@ -8,7 +8,11 @@ import { extendedApiSlice } from './features/posts/postsSlice';
 import { Provider } from 'react-redux';
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 
+
+// Dispatch the getPosts action to initiate fetching posts data from the API
 store.dispatch(extendedApiSlice.endpoints.getPosts.initiate());
+
+// Dispatch the getUsers action to initiate fetching users data from the API
 store.dispatch(usersApiSlice.endpoints.getUsers.initiate());
 
 
