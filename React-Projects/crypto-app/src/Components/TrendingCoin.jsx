@@ -12,7 +12,7 @@ export default function TrendingCoin({data}) {
     <div
      className="w-[40%] bg-gray-200 mb-12 last:mb-0 rounded-lg p-4 relative cursor-pointer hover:bg-gray-100 hover:bg-opacity-40"
      onClick={ () => {
-        console.log(data.id)
+        // console.log(data.id)
         getCoinDetails(data.id)
     } }
     >
