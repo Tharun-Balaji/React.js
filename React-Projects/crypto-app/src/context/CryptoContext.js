@@ -46,7 +46,8 @@ export function CryptoProvider({ children }) {
           setError({ ...error, data: errorResponse.error });
           throw new Error(errorResponse.error);
         })
-        .then((json) => json);
+        .then((json) => json)
+        .catch((error) => console.log(error));
 
       setCryptoData(data);
     } catch (error) {
@@ -54,7 +55,7 @@ export function CryptoProvider({ children }) {
     }
   }
   async function getSearchResult(query) {
-    console.log(query);
+    // console.log(query);
     try {
       const data = await fetch(
         `https://api.coingecko.com/api/v3/search?query=${query}`
