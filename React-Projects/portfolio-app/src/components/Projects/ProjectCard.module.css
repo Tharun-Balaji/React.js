@@ -76,7 +76,7 @@
       opacity: 0;
       animation: cardEntrance 0.8s ease-out forwards;
       position: relative;
-      overflow: hidden;
+      overflow: hidden; 
     }
   
     @keyframes cardEntrance {
@@ -116,6 +116,7 @@
   
     .image {
       margin-bottom: 26px;
+      height:190px;
       transform: scale(1);
       transition: transform 0.3s ease-in-out;
       opacity: 0;

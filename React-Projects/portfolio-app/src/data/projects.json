@@ -3,8 +3,17 @@
     "title": "KanbanBoard",
     "imageSrc": "/assets/projects/KanbanBoard.png",
     "description": "A Kanban Board Build Using HTML CSS and DOM Manipulation",
-    "skills": ["HTML", "CSS", "JavaScript"],
+    "skills": ["HTML", "CSS", "JavaScript","DOM Manipulation"],
     "demo": "https://tharun-balaji.github.io/kanban-board/",
     "source": "https://github.com/Tharun-Balaji/kanban-board"
+  },
+  {
+    "title": "weather-app",
+    "imageSrc": "https://cdn-icons-png.flaticon.com/512/4519/4519124.png",
+    "description": "A Weather App Build Using HTML CSS and DOM Manipulation",
+    "skills": ["HTML", "CSS", "JavaScript", "DOM Manipulation"],
+    "demo":"https://tharun-balaji.github.io/weather-app/",
+    "source": "https://github.com/Tharun-Balaji/weather-app"
+
   }
 ]
