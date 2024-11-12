@@ -42,44 +42,31 @@ The application uses Redux Toolkit for efficient state management with the follo
 
 ```javascript
 // Example of optimistic update for reactions
-addReaction: builder.mutation({
-  query: ({ postId, reaction }) => ({
-    url: `posts/${postId}/reactions`,
-    method: 'POST',
-    body: { reaction }
-  }),
-  onQueryStarted: async ({ postId, reaction }, { dispatch, queryFulfilled }) => {
-    // Optimistic update
-    dispatch(
-      postsAdapter.updateOne({
-        id: postId,
-        changes: {
-          reactions: {
-            ...post.reactions,
-            [reaction]: post.reactions[reaction] + 1
-          }
+ addReaction: builder.mutation({
+      query: ({ postId, reactions }) => ({
+        url: `posts/${postId}`,
+        method: 'PATCH',
+        // In a real app, we'd probably need to base this on user ID somehow
+        // so that a user can't do the same reaction more than once
+        body: { reactions }
+      }),
+      async onQueryStarted({ postId, reactions }, { dispatch, queryFulfilled }) {
+        // `updateQueryData` requires the endpoint name and cache key arguments,
+        // so it knows which piece of cache state to update
+        const patchResult = dispatch(
+          extendedApiSlice.util.updateQueryData('getPosts', undefined, draft => {
+            // The `draft` is Immer-wrapped and can be "mutated" like in createSlice
+            const post = draft.entities[postId]
+            if (post) post.reactions = reactions
+          })
+        )
+        try {
+          await queryFulfilled
+        } catch {
+          patchResult.undo()
         }
-      })
-    )
-    
-    try {
-      await queryFulfilled
-    } catch {
-      // Revert on failure
-      dispatch(
-        postsAdapter.updateOne({
-          id: postId,
-          changes: {
-            reactions: {
-              ...post.reactions,
-              [reaction]: post.reactions[reaction] - 1
-            }
-          }
-        })
-      )
-    }
-  }
-})
+      }
+    })
 ```
 
 ## Setup and Installation
@@ -135,10 +122,38 @@ const handleSubmit = async (postData) => {
 
 ### Adding a Reaction
 ```javascript
-const [addReaction] = useAddReactionMutation()
+const reactionEmoji = {
+	thumbsUp: "👍",
+	wow: "😮",
+	heart: "❤️",
+	rocket: "🚀",
+	coffee: "☕",
+};
 
-const onReactionClick = async (postId, reaction) => {
-  await addReaction({ postId, reaction })
+export default function ReactionButtons({ post }) {
+	const [addReaction] = useAddReactionMutation();
+
+	const reactionButtons = Object.entries(reactionEmoji).map(
+		([name, emoji]) => {
+			return (
+				<button
+					key={name}
+					type="button"
+					className="inline-flex items-center justify-center px-2 py-1 rounded-md bg-white hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-200 ease-in-out m-1 border border-blue-300"
+					onClick={() => {
+						const newValue = post.reactions[name] + 1;
+						addReaction({
+							postId: post.id,
+							reactions: { ...post.reactions, [name]: newValue },
+						});
+					}}
+				>
+					{emoji} {post.reactions[name]}
+				</button>
+			);
+		}
+	);
+	return <div>{reactionButtons}</div>;
 }
 ```
 
