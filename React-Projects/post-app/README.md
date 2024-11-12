@@ -1,70 +1,172 @@
-# Getting Started with Create React App
+# Redux Posts App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A React application for creating, editing, and interacting with posts using modern state management and optimistic updates.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- Create new posts
+- Edit existing posts
+- Add reactions to posts with optimistic updates
+- Cached API responses for improved performance
+- Normalized data structure using Redux Entity Adapter
 
-### `npm start`
+## Tech Stack
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- **React** - Frontend framework
+- **Redux Toolkit** - State management
+- **RTK Query** - API calls and data fetching
+- **Redux Entity Adapter** - Data normalization
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Architecture
 
-### `npm test`
+### State Management
+The application uses Redux Toolkit for efficient state management with the following key features:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- **Normalized State**: Posts data is normalized using Redux Entity Adapter, providing a flat and efficient data structure
+- **Cached Responses**: RTK Query handles API caching to minimize unnecessary network requests
+- **Optimistic Updates**: Reactions are updated immediately in the UI and rolled back if the API call fails
 
-### `npm run build`
+### Data Flow
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1. **Posts Fetching**:
+   - RTK Query handles API calls with automatic caching
+   - Responses are normalized using Entity Adapter
+   - Cached data is automatically invalidated when needed
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+2. **Post Operations**:
+   - Create: New posts are added to the normalized store
+   - Edit: Updates are managed through Entity Adapter's helpers
+   - React: Optimistic updates using `onQueryStarted` callback
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Optimistic Updates Implementation
 
-### `npm run eject`
+```javascript
+// Example of optimistic update for reactions
+addReaction: builder.mutation({
+  query: ({ postId, reaction }) => ({
+    url: `posts/${postId}/reactions`,
+    method: 'POST',
+    body: { reaction }
+  }),
+  onQueryStarted: async ({ postId, reaction }, { dispatch, queryFulfilled }) => {
+    // Optimistic update
+    dispatch(
+      postsAdapter.updateOne({
+        id: postId,
+        changes: {
+          reactions: {
+            ...post.reactions,
+            [reaction]: post.reactions[reaction] + 1
+          }
+        }
+      })
+    )
+    
+    try {
+      await queryFulfilled
+    } catch {
+      // Revert on failure
+      dispatch(
+        postsAdapter.updateOne({
+          id: postId,
+          changes: {
+            reactions: {
+              ...post.reactions,
+              [reaction]: post.reactions[reaction] - 1
+            }
+          }
+        })
+      )
+    }
+  }
+})
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Setup and Installation
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+1. Clone the repository:
+```bash
+git clone <repository-url>
+cd social-posts-app
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+2. Install dependencies:
+```bash
+npm install
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+3. Start the development server:
+```bash
+npm start
+```
 
-## Learn More
+## Project Structure
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```
+src/
+├── app/
+│   ├── store.js         # Redux store configuration
+│   └── api.js           # RTK Query API definitions
+├── features/
+│   └── posts/
+│       ├── postsSlice.js    # Posts reducer and actions
+│       ├── PostsList.js     # Posts list component
+│       ├── AddPostForm.js   # Create post form
+│       └── EditPostForm.js  # Edit post form
+└── components/
+    └── common/          # Shared components
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Usage
 
-### Code Splitting
+### Creating a Post
+```javascript
+const dispatch = useDispatch()
+const [addNewPost] = useAddNewPostMutation()
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+const handleSubmit = async (postData) => {
+  try {
+    await addNewPost(postData).unwrap()
+  } catch (err) {
+    console.error('Failed to save the post', err)
+  }
+}
+```
 
-### Analyzing the Bundle Size
+### Adding a Reaction
+```javascript
+const [addReaction] = useAddReactionMutation()
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+const onReactionClick = async (postId, reaction) => {
+  await addReaction({ postId, reaction })
+}
+```
 
-### Making a Progressive Web App
+## Best Practices
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+1. **Data Normalization**:
+   - Use Entity Adapter for consistent data structure
+   - Maintain relationships between entities
+   - Avoid data duplication
 
-### Advanced Configuration
+2. **Optimistic Updates**:
+   - Implement proper error handling
+   - Revert changes on API failure
+   - Maintain consistent UI state
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+3. **Performance**:
+   - Leverage RTK Query caching
+   - Use memoization for expensive computations
+   - Implement proper loading states
 
-### Deployment
+## Contributing
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
-### `npm run build` fails to minify
+## License
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+This project is licensed under the MIT License - see the LICENSE file for details.
