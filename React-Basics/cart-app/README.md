@@ -1,6 +1,3 @@
-Here’s a README template for your shopping cart app:
-
----
 
 # Shopping Cart App
 
@@ -8,7 +5,8 @@ This is a simple e-commerce shopping cart application built with ReactJS, Redux,
 
 ## 📸 Preview
 
-![App Screenshot](#) <!-- Add a screenshot or GIF showcasing the app -->
+![home page](image.png)
+![key page](image-1.png)
 
 ## 🌟 Features
 
