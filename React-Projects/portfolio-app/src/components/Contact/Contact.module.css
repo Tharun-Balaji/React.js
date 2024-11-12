@@ -159,6 +159,7 @@
     align-items: flex-start;
     list-style: none;
     gap: 26px;
+    overflow: break-word;
     animation: slideInRight 0.8s ease-out;
 }
 
