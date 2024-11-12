@@ -10,7 +10,7 @@ export default function NavBar(){
     }
   );
 
-  console.log(items);
+  // console.log(items);
     return (
       <div
         style={{
