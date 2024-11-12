@@ -19,7 +19,7 @@ export default function Cart(){
         {
             item.map(function(item){
                 return(
-                    <div className="cartCard">
+                    <div key={item.id} className="cartCard">
                         <img src={item.image} alt={item.name}></img>
                         <h5>{item.title}</h5>
                         <h5>Price: {item.price}</h5>
