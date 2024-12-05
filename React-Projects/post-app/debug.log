@@ -1,0 +1,10 @@
+[1112/132716.298:ERROR:registration_protocol_win.cc(108)] CreateFile: The system cannot find the file specified. (0x2)
+[1112/132721.003:ERROR:registration_protocol_win.cc(108)] CreateFile: The system cannot find the file specified. (0x2)
+[1112/135309.178:ERROR:registration_protocol_win.cc(108)] CreateFile: The system cannot find the file specified. (0x2)
+[1112/135311.168:ERROR:registration_protocol_win.cc(108)] CreateFile: The system cannot find the file specified. (0x2)
+[1112/140854.598:ERROR:registration_protocol_win.cc(108)] CreateFile: The system cannot find the file specified. (0x2)
+[1112/140855.535:ERROR:registration_protocol_win.cc(108)] CreateFile: The system cannot find the file specified. (0x2)
+[1112/140859.865:ERROR:registration_protocol_win.cc(108)] CreateFile: The system cannot find the file specified. (0x2)
+[1112/140900.373:ERROR:registration_protocol_win.cc(108)] CreateFile: The system cannot find the file specified. (0x2)
+[1112/140956.125:ERROR:crashpad_client_win.cc(188)] crash server did not respond, self-terminating
+[1112/140956.311:ERROR:registration_protocol_win.cc(108)] CreateFile: The system cannot find the file specified. (0x2)
