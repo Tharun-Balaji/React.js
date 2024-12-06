@@ -1,70 +1,134 @@
-# Getting Started with Create React App
+# 🎬 Movie Watchlist Application
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Overview
 
-## Available Scripts
+This is a React-based movie application that allows users to browse the latest movies, view their details, add movies to a watchlist, and manage their watched movies. The application leverages The Movie Database (TMDb) API to fetch movie data and provides features like pagination, genre filtering, and search functionality.
 
-In the project directory, you can run:
+## 🌟 Features
 
-### `npm start`
+- Browse latest movies with pagination
+- Add/remove movies to watchlist
+- Filter movies by genre
+- Search movies in watchlist
+- Sort movies by rating (ascending/descending)
+- Responsive design
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## 🖥️ Live Demo
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+[View Live Application](https://genuine-narwhal-e87055.netlify.app/)
 
-### `npm test`
+## 🚀 Technologies Used
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- React.js
+- React Router
+- The Movie Database (TMDb) API
+- Tailwind CSS
+- Font Awesome for icons
 
-### `npm run build`
+## 📦 Installation
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1. Clone the repository
+```bash
+git clone https://github.com/Tharun-Balaji/movie-app.git
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+2. Install dependencies
+```bash
+npm install
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+3. Run the application
+```bash
+npm start
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## 🔍 Component Breakdown
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Pagination Component
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+The pagination component is a crucial part of navigating through movie pages:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```jsx
+function Pagination({
+  Page_no,
+  Handle_Left_Arrow_Btn,
+  Handle_Right_Arrow_Btn
+}) {
+  return (
+    <div className='text-2xl flex gap-8 bg-slate-400 m-2 p-4 justify-center'>
+      <div className='cursor-pointer'>
+        <i 
+          className="fa-solid fa-arrow-left"
+          onClick={Handle_Left_Arrow_Btn}
+        ></i>
+      </div>
+      <div className='font-bold'>
+        {Page_no}
+      </div>
+      <div className='cursor-pointer'>
+        <i
+         className="fa-solid fa-arrow-right"
+         onClick={Handle_Right_Arrow_Btn}
+        ></i>
+      </div>
+    </div>
+  )
+}
+```
 
-## Learn More
+#### Pagination Logic Explained
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+The pagination component receives three key props:
+- `Page_no`: Current page number
+- `Handle_Left_Arrow_Btn`: Function to navigate to previous page
+- `Handle_Right_Arrow_Btn`: Function to navigate to next page
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+The component renders:
+- Left arrow icon to go to previous page
+- Current page number
+- Right arrow icon to go to next page
 
-### Code Splitting
+Each arrow is clickable and triggers the corresponding handler function to change the page.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### Watchlist Component Features
 
-### Analyzing the Bundle Size
+The watchlist component offers advanced filtering and sorting:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+1. **Genre Filtering**: 
+   - Dynamically generates genre buttons based on movies in the watchlist
+   - Allows selecting/deselecting genres to filter movies
 
-### Making a Progressive Web App
+2. **Search Functionality**:
+   - Real-time movie search within the watchlist
+   - Case-insensitive search by movie title
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+3. **Sorting**:
+   - Sort movies by rating in ascending or descending order
+   - Uses `toSorted()` method for sorting
 
-### Advanced Configuration
+## 🖼️ Preview
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+### Home Page
+![home page](image.png)
 
-### Deployment
+### Watchlist Page
+![watchlist page](image-1.png)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## 🤝 Contributing
 
-### `npm run build` fails to minify
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## 📄 License
+
+Distributed under the MIT License. See [`LICENSE.md`](LICENSE.md) for more information.
+
+## 📞 Contact
+
+Tharun Balaji - [tharunbalaji110@gmail.com](mailto:tharunbalaji110@gmail.com)
+
+Project Link: [https://github.com/Tharun-Balaji/React.js/tree/main/React-Basics/movies-app](https://github.com/Tharun-Balaji/React.js/tree/main/React-Basics/movies-app)
